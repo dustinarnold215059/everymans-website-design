@@ -2,7 +2,7 @@ import { siteConfig } from "@/config/site.config";
 import { Section, Kicker } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
-import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
+import { Screenshot } from "@/components/ui/Screenshot";
 import { IconArrowRight, IconArrowUpRight } from "@/components/ui/icons";
 
 export function FeaturedWork() {
@@ -19,11 +19,12 @@ export function FeaturedWork() {
               <span className="h-2.5 w-2.5 rounded-full bg-on-ink/20" />
               <span className="ml-3 h-5 flex-1 rounded-full bg-on-ink/10" />
             </div>
-            <PlaceholderImage
-              label="Abolish Abortion Michigan"
-              caption="Swap for a real homepage screenshot"
+            <Screenshot
+              src={featured.image}
+              alt={`${featured.title} homepage`}
               ratio="16/10"
               tone="dark"
+              sizes="(max-width: 1024px) 100vw, 560px"
             />
           </div>
         </Reveal>

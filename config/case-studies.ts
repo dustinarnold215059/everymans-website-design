@@ -15,10 +15,12 @@ export type CaseStudy = {
   problem: string;
   /** What I designed and built. */
   built: string[];
+  /** Hero screenshot for the case study (path under /public). */
+  image: string;
   /** The tech behind it. */
   stack: string[];
-  /** Screenshot gallery — swap these placeholders for real captures. */
-  gallery: { label: string; caption: string }[];
+  /** Screenshot gallery. */
+  gallery: { label: string; caption: string; image: string }[];
 };
 
 export const caseStudies: CaseStudy[] = [
@@ -28,6 +30,7 @@ export const caseStudies: CaseStudy[] = [
     url: "https://abolishabortionmichigan.com",
     summary:
       "A complete advocacy site built from the ground up — petitions, a bill tracker, donations, and live news — fast, secure, and mobile-friendly.",
+    image: "/work/aam-home.png",
     year: "2025",
     role: "Design, build, and ongoing maintenance",
     problem:
@@ -49,10 +52,10 @@ export const caseStudies: CaseStudy[] = [
       "Security headers + spam protection",
     ],
     gallery: [
-      { label: "Home / hero", caption: "Landing page and primary call to action" },
-      { label: "Petition flow", caption: "Sign-up and signature confirmation" },
-      { label: "Bill tracker", caption: "Live status of abolition legislation" },
-      { label: "Donate", caption: "Clean, secure donation flow" },
+      { label: "Home", caption: "Landing page and primary call to action", image: "/work/aam-home.png" },
+      { label: "The petition", caption: "Petition page with a live signature count", image: "/work/aam-petition.png" },
+      { label: "Abolition bills", caption: "Explaining and tracking abolition legislation", image: "/work/aam-bills.png" },
+      { label: "Donate", caption: "Clean donation flow and supporter messaging", image: "/work/aam-donate.png" },
     ],
   },
 ];

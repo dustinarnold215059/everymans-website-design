@@ -5,7 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { Section, Kicker } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
-import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
+import { Screenshot } from "@/components/ui/Screenshot";
 import { IconCheck, IconArrowUpRight, IconArrowRight } from "@/components/ui/icons";
 
 export const metadata: Metadata = {
@@ -27,8 +27,7 @@ export default function WorkPage() {
               Real sites for real missions — built to last and easy to run.
             </h1>
             <p className="mt-5 max-w-2xl text-lg text-muted">
-              A closer look at what I&apos;ve built. Every screenshot below is a placeholder you
-              can swap for the real thing.
+              A closer look at what I&apos;ve built — captured from the live, in-production site.
             </p>
           </Reveal>
         </Container>
@@ -66,10 +65,12 @@ export default function WorkPage() {
           {/* Hero screenshot */}
           <Reveal delay={60} className="mt-10">
             <div className="rounded-xl2 border border-line bg-paper p-3 shadow-soft">
-              <PlaceholderImage
-                label={`${cs.name} — homepage`}
-                caption="Swap for a full-width homepage screenshot"
+              <Screenshot
+                src={cs.image}
+                alt={`${cs.name} — homepage`}
                 ratio="16/9"
+                priority={idx === 0}
+                sizes="(max-width: 1024px) 100vw, 1024px"
               />
             </div>
           </Reveal>
@@ -111,10 +112,15 @@ export default function WorkPage() {
           {/* Gallery */}
           <Reveal className="mt-12">
             <h3 className="text-xl">Screenshot gallery</h3>
-            <p className="mt-2 text-sm text-muted">Placeholders — replace each with a real capture.</p>
-            <div className="mt-5 grid gap-5 sm:grid-cols-2">
+            <p className="mt-2 text-sm text-muted">Captured from the live site.</p>
+            <div className="mt-5 grid gap-6 sm:grid-cols-2">
               {cs.gallery.map((g) => (
-                <PlaceholderImage key={g.label} label={g.label} caption={g.caption} ratio="16/10" />
+                <figure key={g.label}>
+                  <Screenshot src={g.image} alt={`${cs.name} — ${g.label}`} ratio="16/10" />
+                  <figcaption className="mt-2.5 text-sm text-muted">
+                    <span className="font-medium text-ink">{g.label}.</span> {g.caption}
+                  </figcaption>
+                </figure>
               ))}
             </div>
           </Reveal>

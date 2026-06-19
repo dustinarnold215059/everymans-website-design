@@ -2,7 +2,7 @@ import { siteConfig } from "@/config/site.config";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
-import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
+import { Screenshot } from "@/components/ui/Screenshot";
 import { IconArrowRight, IconBolt, IconShield, IconCheck } from "@/components/ui/icons";
 
 export function Hero() {
@@ -84,10 +84,12 @@ export function Hero() {
                   <span className="h-2.5 w-2.5 rounded-full bg-line" />
                   <span className="ml-3 h-5 flex-1 rounded-full bg-sand" />
                 </div>
-                <PlaceholderImage
-                  label="Your site, done right"
-                  caption="Swap for a hero screenshot of a recent build"
-                  ratio="4/3"
+                <Screenshot
+                  src={siteConfig.featured.image}
+                  alt={`${siteConfig.featured.title} — homepage built by ${siteConfig.name}`}
+                  ratio="16/10"
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 560px"
                 />
               </div>
 

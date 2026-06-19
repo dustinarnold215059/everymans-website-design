@@ -16,7 +16,7 @@ export const siteConfig = {
   shortName: "Every Man's",
   domain: "everymanswebsitedesign.com",
   url: "https://everymanswebsitedesign.com",
-  email: "gecko215059@gmail.com", // shown on the site + Contact section
+  email: "Dustin.t.arnold215059@gmail.com", // shown on the site + Contact section
   tagline: "Websites that do the work — built by someone who gets the mission.",
   description:
     "I design, build, and maintain fast, modern websites for ministries, nonprofits, and mission-driven causes — and because I'm part of the work, you're not explaining your mission to a stranger.",
@@ -96,6 +96,7 @@ export const siteConfig = {
     href: "https://abolishabortionmichigan.com",
     body: "A complete site built from the ground up — a petition system, abolition-bill tracker, gospel and \"what we believe\" sections, live news and events, and a clean donation flow. Fast, secure, mobile-friendly, and deployed on Vercel.",
     tags: ["Next.js", "Vercel", "Petitions", "Donations", "Bill tracker"],
+    image: "/work/aam-home.png",
     caseStudyHref: "/work",
   },
 
