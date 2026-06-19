@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     "church website",
     "ministry website",
     "nonprofit website",
-    "pro-life website",
+    "abolition movement website",
     "mission-driven web design",
   ],
   alternates: { canonical: "/" },

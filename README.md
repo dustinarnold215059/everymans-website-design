@@ -1,6 +1,6 @@
 # Every Man's Website Design
 
-Marketing + portfolio site for **Every Man's Website Design** — fast, modern, conversion-focused, and built for mission-driven organizations (churches, ministries, nonprofits, abolition/pro-life groups).
+Marketing + portfolio site for **Every Man's Website Design** — fast, modern, conversion-focused, and built for mission-driven organizations (churches, ministries, nonprofits, abolition groups).
 
 Built with **Next.js (App Router) + TypeScript + Tailwind CSS**, deployed on **Vercel**. Contact form uses **Resend** for email and **Upstash Redis** for rate limiting.
 

@@ -59,7 +59,7 @@ export default function OpengraphImage() {
               maxWidth: 900,
             }}
           >
-            Ministries · Nonprofits · Abolition &amp; pro-life · Mission-driven causes
+            Ministries · Nonprofits · Abolition · Mission-driven causes
           </div>
         </div>
 

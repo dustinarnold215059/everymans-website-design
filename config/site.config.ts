@@ -108,7 +108,7 @@ export const siteConfig = {
       "Churches",
       "Ministries",
       "Nonprofits",
-      "Abolition & pro-life groups",
+      "Abolition groups",
       "Small mission-driven businesses",
     ],
   },
