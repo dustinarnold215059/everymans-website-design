@@ -101,7 +101,7 @@ Secrets are only ever read server-side.
    git add .
    git commit -m "Initial commit: Every Man's Website Design"
    git branch -M main
-   git remote add origin https://github.com/Dustinarnold/everymans-website-design.git
+   git remote add origin https://github.com/dustinarnold215059/everymans-website-design.git
    git push -u origin main
    ```
 2. **Import the repo** at https://vercel.com/new (framework auto-detected as Next.js).
