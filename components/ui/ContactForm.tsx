@@ -230,7 +230,7 @@ export function ContactForm() {
         <Button type="submit" size="lg" disabled={status === "submitting"}>
           {status === "submitting" ? "Sending…" : "Send message"}
         </Button>
-        <p className="text-xs text-muted">
+        <p className="break-words text-xs text-muted">
           Or email me at{" "}
           <a href={`mailto:${siteConfig.email}`} className="font-medium text-ink underline">
             {siteConfig.email}

@@ -33,14 +33,6 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link
-                  href="/work"
-                  className="text-sm text-on-ink/90 transition-colors hover:text-accent-soft"
-                >
-                  Case study
-                </Link>
-              </li>
             </ul>
           </div>
 

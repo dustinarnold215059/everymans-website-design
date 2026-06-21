@@ -11,7 +11,7 @@ export function Contact() {
   return (
     <Section id="contact" tone="sand">
       <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-        <Reveal>
+        <Reveal className="min-w-0">
           <SectionHeading kicker="Contact" title={contact.heading} intro={contact.intro} />
 
           <ul className="mt-8 space-y-4">
@@ -43,14 +43,14 @@ export function Contact() {
             <p className="text-sm text-muted">Prefer email?</p>
             <a
               href={`mailto:${siteConfig.email}`}
-              className="mt-1 inline-block font-display text-lg text-ink hover:text-accent"
+              className="mt-1 block break-words font-display text-lg text-ink hover:text-accent"
             >
               {siteConfig.email}
             </a>
           </div>
         </Reveal>
 
-        <Reveal delay={80}>
+        <Reveal delay={80} className="min-w-0">
           <ContactForm />
         </Reveal>
       </div>
