@@ -23,10 +23,13 @@ const newsreader = Newsreader({
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? siteConfig.url;
 
+// Search/social title — kept concise and keyword-forward (independent of the hero tagline).
+const seoTitle = `${siteConfig.name} — Web Design for Ministries & Nonprofits`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${siteConfig.name} — ${siteConfig.tagline}`,
+    default: seoTitle,
     template: `%s · ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -48,13 +51,13 @@ export const metadata: Metadata = {
     type: "website",
     url: siteUrl,
     siteName: siteConfig.name,
-    title: `${siteConfig.name} — ${siteConfig.tagline}`,
+    title: seoTitle,
     description: siteConfig.description,
     images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: siteConfig.ogImageAlt }],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} — ${siteConfig.tagline}`,
+    title: seoTitle,
     description: siteConfig.description,
     images: ["/opengraph-image"],
   },
@@ -63,10 +66,8 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
-  icons: {
-    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
-    apple: [{ url: "/icon.svg" }],
-  },
+  // Favicon + Apple touch icon are provided by app/icon.svg and app/apple-icon.tsx
+  // (Next file conventions), so no manual icon links are needed here.
 };
 
 export const viewport: Viewport = {

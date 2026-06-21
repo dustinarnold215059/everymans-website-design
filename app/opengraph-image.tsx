@@ -19,52 +19,64 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           background: c.ink,
-          padding: "72px 80px",
+          padding: "68px 76px",
           fontFamily: "Georgia, serif",
           color: c["on-ink"],
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
+        {/* logo + wordmark */}
+        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
           <div
             style={{
-              width: 56,
-              height: 56,
-              borderRadius: 14,
-              background: c.accent,
+              width: 72,
+              height: 72,
+              borderRadius: 16,
+              background: c["ink-soft"],
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: 34,
-              fontWeight: 700,
-              color: c.ink,
+              fontStyle: "italic",
+              fontWeight: 600,
+              fontSize: 46,
+              color: c["on-ink"],
             }}
           >
             E
           </div>
-          <div style={{ fontSize: 26, color: c["on-ink-muted"], letterSpacing: 2 }}>
+          <div
+            style={{
+              fontSize: 23,
+              letterSpacing: 3,
+              fontWeight: 700,
+              color: c["on-ink-muted"],
+              fontFamily: "Arial, sans-serif",
+            }}
+          >
             {siteConfig.name.toUpperCase()}
           </div>
         </div>
 
+        {/* tagline */}
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 64, lineHeight: 1.1, fontWeight: 600, maxWidth: 980 }}>
+          <div style={{ fontSize: 62, lineHeight: 1.08, fontWeight: 600, color: c["on-ink-bright"], maxWidth: 1000 }}>
             {siteConfig.tagline}
           </div>
           <div
             style={{
-              marginTop: 28,
-              fontSize: 28,
+              marginTop: 26,
+              fontSize: 26,
               color: c["on-ink-muted"],
               fontFamily: "Arial, sans-serif",
-              maxWidth: 900,
+              maxWidth: 940,
             }}
           >
-            Ministries · Nonprofits · Abolition · Mission-driven causes
+            Churches · Ministries · Nonprofits · Abolition · Mission-driven causes
           </div>
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <div style={{ width: 40, height: 5, background: c.accent, borderRadius: 4 }} />
+        {/* accent + domain */}
+        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+          <div style={{ width: 44, height: 6, background: c.accent, borderRadius: 4 }} />
           <div style={{ fontSize: 24, color: c["on-ink"], fontFamily: "Arial, sans-serif" }}>
             {siteConfig.domain}
           </div>

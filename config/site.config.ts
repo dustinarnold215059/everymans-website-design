@@ -19,7 +19,7 @@ export const siteConfig = {
   email: "Everymanswebsitedesign@gmail.com", // shown on the site + Contact section
   tagline: "Websites that do the work — built by someone who gets the mission.",
   description:
-    "I design, build, and maintain fast, modern websites for ministries, nonprofits, and mission-driven causes — and because I'm part of the work, you're not explaining your mission to a stranger.",
+    "Fast, modern websites for churches, ministries, nonprofits, and mission-driven causes — designed, built, and maintained by someone who's part of the work.",
   ogImageAlt: "Every Man's Website Design — websites for mission-driven organizations.",
 
   // ── Brand palette ─────────────────────────────────────────────────────────
