@@ -2,7 +2,8 @@ import { siteConfig } from "@/config/site.config";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { ContactForm } from "@/components/ui/ContactForm";
-import { IconCheck } from "@/components/ui/icons";
+import { Button } from "@/components/ui/Button";
+import { IconCheck, IconArrowUpRight } from "@/components/ui/icons";
 
 export function Contact() {
   const { contact } = siteConfig;
@@ -27,6 +28,16 @@ export function Contact() {
               </li>
             ))}
           </ul>
+
+          {siteConfig.booking.url ? (
+            <div className="mt-8 rounded-xl2 border border-line bg-paper p-5">
+              <p className="text-sm text-muted">Prefer to talk it through?</p>
+              <Button href={siteConfig.booking.url} variant="ghost" size="md" className="mt-3">
+                {siteConfig.booking.label}
+                <IconArrowUpRight width={16} height={16} />
+              </Button>
+            </div>
+          ) : null}
 
           <div className="mt-8 rounded-xl2 border border-line bg-paper p-5">
             <p className="text-sm text-muted">Prefer email?</p>

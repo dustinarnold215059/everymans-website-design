@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import { siteConfig } from "@/config/site.config";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { JsonLd } from "@/components/ui/JsonLd";
 import "./globals.css";
 
 const inter = Inter({
@@ -72,10 +74,35 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const orgJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: siteConfig.name,
+  url: siteUrl,
+  email: siteConfig.email,
+  description: siteConfig.description,
+  image: `${siteUrl}/opengraph-image`,
+  priceRange: "$$",
+  areaServed: "US",
+  knowsAbout: [
+    "Web design",
+    "Next.js development",
+    "Website maintenance",
+    "Data automation",
+  ],
+  serviceType: [
+    "Website design and development",
+    "Website care and hosting",
+    "Automation and data",
+  ],
+  founder: { "@type": "Person", name: "Dustin" },
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
       <body className="min-h-dvh bg-paper">
+        <JsonLd data={orgJsonLd} />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-ink focus:px-4 focus:py-2 focus:text-on-ink"
@@ -85,6 +112,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main id="main">{children}</main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );

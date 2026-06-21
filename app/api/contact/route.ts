@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { validateContact } from "@/lib/validation";
 import { checkRateLimit } from "@/lib/rateLimit";
-import { sendContactEmail } from "@/lib/resend";
+import { sendContactEmail, sendContactAutoReply } from "@/lib/resend";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -51,7 +51,7 @@ export async function POST(req: Request) {
     );
   }
 
-  // 5) Send via Resend
+  // 5) Send the inquiry to the owner via Resend
   try {
     await sendContactEmail(result.value);
   } catch (err) {
@@ -60,6 +60,13 @@ export async function POST(req: Request) {
       { ok: false, error: "Something went wrong sending your message. Please email me directly." },
       { status: 500 },
     );
+  }
+
+  // 6) Best-effort confirmation to the sender — never fail the request for this
+  try {
+    await sendContactAutoReply({ name: result.value.name, email: result.value.email });
+  } catch (err) {
+    console.error("[contact] auto-reply error:", err);
   }
 
   return NextResponse.json({ ok: true }, { status: 200 });

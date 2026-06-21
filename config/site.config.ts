@@ -51,6 +51,14 @@ export const siteConfig = {
   ],
   primaryCta: { label: "Start a project", href: "/#contact" },
 
+  // ── Booking ───────────────────────────────────────────────────────────────
+  // Optional "Book a call" link. Paste your Cal.com / Calendly URL here to show
+  // a booking button next to the contact form. Leave url empty to hide it.
+  booking: {
+    url: "", // e.g. "https://cal.com/dustin/intro" or "https://calendly.com/…"
+    label: "Book a 15-min call",
+  },
+
   // ── Hero ──────────────────────────────────────────────────────────────────
   hero: {
     eyebrow: "Web design for mission-driven organizations",
@@ -89,6 +97,30 @@ export const siteConfig = {
     ],
   },
 
+  // ── How it works ──────────────────────────────────────────────────────────
+  process: {
+    heading: "How it works",
+    intro: "A simple, predictable path from first conversation to a site you're proud of.",
+    steps: [
+      {
+        title: "Talk",
+        body: "We start with a short, no-pressure conversation about your mission, your goals, and what your site needs to do.",
+      },
+      {
+        title: "Design",
+        body: "I map the pages and write a clear, fixed-price proposal — then design a clean, on-brand look before any code is written.",
+      },
+      {
+        title: "Build",
+        body: "I build a fast, secure, mobile-first site with the features you need: petitions, donations, events, and content you can update.",
+      },
+      {
+        title: "Launch & care",
+        body: "We launch on your domain, and I stay on for hosting, security, backups, and updates — so you never think about it.",
+      },
+    ],
+  },
+
   // ── Featured work (home) ──────────────────────────────────────────────────
   featured: {
     heading: "Featured work",
@@ -99,6 +131,22 @@ export const siteConfig = {
     tags: ["Next.js", "Vercel", "Petitions", "Donations", "Bill tracker"],
     image: "/work/aam-home.png",
     caseStudyHref: "/work",
+  },
+
+  // ── Social proof (testimonial + metrics) ──────────────────────────────────
+  // Replace the placeholder quote with a real one when you have it. Update the
+  // stats to whatever numbers you want to stand behind.
+  proof: {
+    heading: "Proof, not promises",
+    quote:
+      "Dustin built our site from the ground up and still keeps it running. He understood the mission from day one — we never had to explain ourselves.",
+    author: "Abolish Abortion Michigan",
+    role: "Client — placeholder quote, swap for a real testimonial",
+    stats: [
+      { value: "100%", label: "Custom-built, no templates" },
+      { value: "Next.js", label: "Modern, fast, and secure" },
+      { value: "Always on", label: "Hosting, security & updates handled" },
+    ],
   },
 
   // ── Who I serve ───────────────────────────────────────────────────────────
@@ -123,6 +171,34 @@ export const siteConfig = {
       "Built Abolish Abortion Michigan from the ground up",
       "Data + automation background, not just pretty pages",
       "Part of the communities I build for",
+    ],
+  },
+
+  // ── FAQ ───────────────────────────────────────────────────────────────────
+  faq: {
+    heading: "Questions, answered",
+    intro: "The things people usually want to know before reaching out.",
+    items: [
+      {
+        q: "How much does a website cost?",
+        a: "Most projects are fixed-price, so you know the number before we start — no hourly surprises. The total depends on scope (pages, features like petitions or donations, and integrations). Tell me what you need and I'll send a clear proposal.",
+      },
+      {
+        q: "How long does it take?",
+        a: "A typical site takes a few weeks from our first conversation to launch, depending on scope and how quickly we can gather your content. I'll give you a realistic timeline in the proposal.",
+      },
+      {
+        q: "Do I own the website?",
+        a: "Yes. You own the site, the domain, and the content. Everything lives on your accounts — I just build and maintain it. There's no lock-in.",
+      },
+      {
+        q: "What happens after launch?",
+        a: "You can take it from there, or put it on a Care Plan and I'll handle hosting, security, backups, domain & email, and content updates for a flat monthly fee.",
+      },
+      {
+        q: "Do you only work with abolition groups?",
+        a: "No — I work with churches, ministries, nonprofits, abolition groups, and small mission-driven organizations. If your work matters and you need it done right, let's talk.",
+      },
     ],
   },
 

@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { caseStudies } from "@/config/case-studies";
+import { siteConfig } from "@/config/site.config";
 import { Container } from "@/components/ui/Container";
+import { JsonLd } from "@/components/ui/JsonLd";
 import { Section, Kicker } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
@@ -15,9 +17,31 @@ export const metadata: Metadata = {
   alternates: { canonical: "/work" },
 };
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? siteConfig.url;
+
+const workJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: caseStudies.map((cs, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    item: {
+      "@type": "CreativeWork",
+      name: cs.name,
+      url: cs.url,
+      image: `${siteUrl}${cs.image}`,
+      description: cs.summary,
+      dateCreated: cs.year,
+      creator: { "@type": "Person", name: "Dustin" },
+      keywords: cs.stack.join(", "),
+    },
+  })),
+};
+
 export default function WorkPage() {
   return (
     <>
+      <JsonLd data={workJsonLd} />
       {/* Page header */}
       <section className="border-b border-line bg-paper">
         <Container className="pb-12 pt-16 sm:pt-20">

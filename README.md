@@ -14,9 +14,12 @@ Almost everything you'll want to change lives in **one file**:
 config/site.config.ts
 ```
 
-- **Copy** — every headline, paragraph, service description, nav label, etc.
+- **Copy** — every headline, paragraph, service description, nav label, FAQ, process step, testimonial, etc.
 - **Color palette** — `theme.colors`. Change a hex value and the whole site re-skins
   (Tailwind reads these via `tailwind.config.ts`, so e.g. `bg-ink` / `text-accent` follow automatically).
+- **Booking link** — set `booking.url` to your Cal.com/Calendly link to show a
+  "Book a call" button by the contact form. Leave it empty to hide it.
+- **Testimonial** — `proof.quote` is a placeholder; swap it for a real quote when you have one.
 
 Case studies for the `/work` page live in:
 
@@ -88,8 +91,18 @@ Copy `.env.example` → `.env.local` and fill in:
 2. **Rate limiting** — Upstash Redis, 5 requests / 10 minutes per IP (skipped if not configured).
 3. **Validation** — shared `lib/validation.ts` runs on the client *and* server.
 4. **Send** — formatted HTML + text email to `EMAIL_TO` via Resend, with `replyTo` set to the sender.
+5. **Auto-reply** — a friendly confirmation is sent back to the submitter (best-effort; a
+   failure here never fails the submission).
 
 Secrets are only ever read server-side.
+
+## 📈 Analytics, SEO & CI
+
+- **Analytics** — [Vercel Web Analytics](https://vercel.com/docs/analytics) is wired in
+  (`<Analytics />`). Enable it in your Vercel project's Analytics tab; it's a no-op locally.
+- **Structured data** — JSON-LD is emitted for the business (`ProfessionalService`), the FAQ
+  (`FAQPage`, eligible for rich results), and the case studies (`ItemList`).
+- **CI** — `.github/workflows/ci.yml` runs typecheck + build on every push/PR to `main`.
 
 ---
 

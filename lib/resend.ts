@@ -85,3 +85,52 @@ ${input.message}`;
 
   if (error) throw new Error(error.message ?? "Resend failed to send the email");
 }
+
+/**
+ * Sends a friendly confirmation to the person who submitted the form.
+ * Best-effort: callers should not fail the request if this throws.
+ */
+export async function sendContactAutoReply(input: {
+  name: string;
+  email: string;
+}): Promise<void> {
+  const apiKey = process.env.RESEND_API_KEY;
+  const from =
+    process.env.EMAIL_FROM ?? `Every Man's Website Design <onboarding@resend.dev>`;
+  const replyTo = process.env.EMAIL_TO;
+  if (!apiKey) throw new Error("RESEND_API_KEY is not set");
+
+  const resend = new Resend(apiKey);
+  const firstName = input.name.split(" ")[0] || "there";
+
+  const html = `
+  <div style="font-family:Inter,Arial,sans-serif;max-width:540px;margin:0 auto;color:#1A1A17;line-height:1.6">
+    <div style="background:#13302A;color:#F4EFE6;padding:20px 24px;border-radius:12px 12px 0 0;font-weight:600">
+      ${escapeHtml(siteConfig.name)}
+    </div>
+    <div style="border:1px solid #E2D8C5;border-top:none;border-radius:0 0 12px 12px;padding:22px 24px">
+      <p style="margin:0 0 14px">Hi ${escapeHtml(firstName)},</p>
+      <p style="margin:0 0 14px">Thanks for reaching out — your message came through and I'll get back to you personally, usually within a day or two.</p>
+      <p style="margin:0 0 14px">If anything's urgent in the meantime, just reply to this email.</p>
+      <p style="margin:18px 0 0">— Dustin<br/><span style="color:#5F584C">${escapeHtml(siteConfig.name)}</span></p>
+    </div>
+  </div>`;
+
+  const text = `Hi ${firstName},
+
+Thanks for reaching out — your message came through and I'll get back to you personally, usually within a day or two. If anything's urgent, just reply to this email.
+
+— Dustin
+${siteConfig.name}`;
+
+  const { error } = await resend.emails.send({
+    from,
+    to: input.email,
+    ...(replyTo ? { replyTo } : {}),
+    subject: `Thanks — I got your message`,
+    html,
+    text,
+  });
+
+  if (error) throw new Error(error.message ?? "Resend failed to send the auto-reply");
+}
