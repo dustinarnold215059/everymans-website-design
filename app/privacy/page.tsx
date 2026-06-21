@@ -27,7 +27,7 @@ export default function PrivacyPage() {
       <section className="border-b border-line bg-paper">
         <Container className="pb-12 pt-16 sm:pt-20">
           <Kicker>Legal</Kicker>
-          <h1 className="mt-4 text-4xl leading-[1.05] sm:text-5xl">Privacy Policy</h1>
+          <h1 className="mt-3 font-display text-4xl font-medium leading-[1.05] tracking-[-0.02em] sm:text-5xl">Privacy Policy</h1>
           <p className="mt-5 max-w-2xl text-lg text-muted">
             This explains what I collect when you use {siteConfig.name}, why, and the choices you
             have. Plain language, no surprises.

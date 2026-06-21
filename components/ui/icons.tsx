@@ -108,3 +108,37 @@ export function IconStore(props: IconProps) {
     </svg>
   );
 }
+
+/* ── Two-tone service icons (cream stroke + terracotta detail) for the forest tiles ── */
+export function IconBuild(props: IconProps) {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" {...props} aria-hidden>
+      <rect x="3" y="4" width="18" height="14" rx="2.5" stroke="#EFE6D2" strokeWidth="1.6" />
+      <path d="M3 8h18" stroke="#EFE6D2" strokeWidth="1.6" />
+      <path d="M9 21h6M12 18v3" stroke="#C5532E" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function IconCare(props: IconProps) {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" {...props} aria-hidden>
+      <path
+        d="M12 3l7 3v5c0 4.2-2.9 7.5-7 9-4.1-1.5-7-4.8-7-9V6l7-3Z"
+        stroke="#EFE6D2"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      <path d="M9 12l2 2 4-4" stroke="#C5532E" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export function IconData(props: IconProps) {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" {...props} aria-hidden>
+      <path d="M4 19V9M9 19V5M14 19v-7M19 19v-11" stroke="#EFE6D2" strokeWidth="1.7" strokeLinecap="round" />
+      <circle cx="14" cy="12" r="1.9" fill="#C5532E" />
+    </svg>
+  );
+}

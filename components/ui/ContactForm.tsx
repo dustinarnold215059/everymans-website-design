@@ -5,16 +5,16 @@ import { siteConfig } from "@/config/site.config";
 import { validateContact } from "@/lib/validation";
 import { Button } from "./Button";
 import { cn } from "@/lib/cn";
-import { IconCheck } from "./icons";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
 const initial = { name: "", organization: "", email: "", need: "", message: "", website: "" };
 
-const labelCls = "block text-sm font-medium text-ink";
+const cardCls = "rounded-[20px] border border-line bg-surface p-7 shadow-form sm:px-8 sm:py-[34px]";
+const labelCls = "block text-[13px] font-bold text-fg";
 const fieldCls =
-  "mt-1.5 w-full rounded-lg border border-line bg-paper px-3.5 py-2.5 text-[15px] text-fg shadow-sm transition-colors placeholder:text-muted/60 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30";
-const errCls = "mt-1 text-xs font-medium text-accent";
+  "mt-1.5 w-full rounded-[10px] border border-line bg-paper px-3.5 py-3 text-[15px] font-medium text-fg transition-colors placeholder:text-faint/70 focus:border-accent focus:bg-surface focus:outline-none";
+const errCls = "mt-1 text-xs font-semibold text-accent";
 
 export function ContactForm() {
   const [values, setValues] = useState(initial);
@@ -29,7 +29,6 @@ export function ContactForm() {
     e.preventDefault();
     setServerError(null);
 
-    // Client-side validation (server re-validates regardless)
     const result = validateContact(values);
     if (!result.ok) {
       setErrors(result.errors);
@@ -44,20 +43,17 @@ export function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
       });
-
       const data = (await res.json().catch(() => ({}))) as {
         ok?: boolean;
         error?: string;
         fields?: Record<string, string>;
       };
-
       if (!res.ok || !data.ok) {
         if (data.fields) setErrors(data.fields);
         setServerError(data.error ?? "Something went wrong. Please try again.");
         setStatus("error");
         return;
       }
-
       setStatus("success");
       setValues(initial);
     } catch {
@@ -71,16 +67,18 @@ export function ContactForm() {
       <div
         role="status"
         aria-live="polite"
-        className="rounded-xl2 border border-line bg-paper p-8 text-center shadow-soft"
+        className={cn(cardCls, "flex min-h-[380px] flex-col items-center justify-center gap-3.5 text-center")}
       >
-        <div className="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-full bg-accent/15 text-accent">
-          <IconCheck width={26} height={26} />
+        <div className="flex h-[60px] w-[60px] items-center justify-center rounded-full bg-ink-soft">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden>
+            <path d="M5 12.5l4 4 10-10" stroke="#EFE6D2" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         </div>
-        <h3 className="mt-4 text-2xl">{siteConfig.contact.successTitle}</h3>
-        <p className="mx-auto mt-3 max-w-sm text-muted">{siteConfig.contact.successBody}</p>
+        <h3 className="font-display text-[28px] font-medium">{siteConfig.contact.successTitle}</h3>
+        <p className="max-w-[24em] text-[15px] leading-[1.6] text-muted">{siteConfig.contact.successBody}</p>
         <a
           href={`mailto:${siteConfig.email}`}
-          className="mt-5 inline-block text-sm font-semibold text-accent hover:text-accent-soft"
+          className="mt-1 break-words text-sm font-bold text-accent hover:text-accent-hover"
         >
           {siteConfig.email}
         </a>
@@ -89,12 +87,8 @@ export function ContactForm() {
   }
 
   return (
-    <form
-      noValidate
-      onSubmit={onSubmit}
-      className="rounded-xl2 border border-line bg-paper p-6 shadow-soft sm:p-8"
-    >
-      <div className="grid gap-5 sm:grid-cols-2">
+    <form noValidate onSubmit={onSubmit} className={cn(cardCls, "relative flex flex-col gap-4")}>
+      <div className="grid grid-cols-1 items-end gap-3.5 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className={labelCls}>
             Name
@@ -104,6 +98,7 @@ export function ContactForm() {
             name="name"
             type="text"
             autoComplete="name"
+            placeholder="Your name"
             value={values.name}
             onChange={set("name")}
             className={cn(fieldCls, errors.name && "border-accent")}
@@ -118,14 +113,15 @@ export function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="organization" className={labelCls}>
-            Organization <span className="font-normal text-muted">(optional)</span>
+          <label htmlFor="organization" className={cn(labelCls, "whitespace-nowrap")}>
+            Organization <span className="font-medium text-faint">(optional)</span>
           </label>
           <input
             id="organization"
             name="organization"
             type="text"
             autoComplete="organization"
+            placeholder="Your org"
             value={values.organization}
             onChange={set("organization")}
             className={cn(fieldCls, errors.organization && "border-accent")}
@@ -134,7 +130,7 @@ export function ContactForm() {
         </div>
       </div>
 
-      <div className="mt-5">
+      <div>
         <label htmlFor="email" className={labelCls}>
           Email
         </label>
@@ -143,6 +139,7 @@ export function ContactForm() {
           name="email"
           type="email"
           autoComplete="email"
+          placeholder="you@example.com"
           value={values.email}
           onChange={set("email")}
           className={cn(fieldCls, errors.email && "border-accent")}
@@ -156,7 +153,7 @@ export function ContactForm() {
         )}
       </div>
 
-      <div className="mt-5">
+      <div>
         <label htmlFor="need" className={labelCls}>
           What do you need?
         </label>
@@ -165,10 +162,14 @@ export function ContactForm() {
           name="need"
           value={values.need}
           onChange={set("need")}
-          className={cn(fieldCls, "appearance-none bg-[length:16px] bg-[right_0.9rem_center] bg-no-repeat pr-10", errors.need && "border-accent")}
+          className={cn(
+            fieldCls,
+            "appearance-none bg-[length:16px] bg-[right_0.9rem_center] bg-no-repeat pr-10",
+            errors.need && "border-accent",
+          )}
           style={{
             backgroundImage:
-              "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235F584C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E\")",
+              "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23837C6E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E\")",
           }}
           aria-invalid={!!errors.need}
         >
@@ -184,18 +185,18 @@ export function ContactForm() {
         {errors.need && <p className={errCls}>{errors.need}</p>}
       </div>
 
-      <div className="mt-5">
+      <div>
         <label htmlFor="message" className={labelCls}>
           Message
         </label>
         <textarea
           id="message"
           name="message"
-          rows={5}
+          rows={4}
           value={values.message}
           onChange={set("message")}
           className={cn(fieldCls, "resize-y", errors.message && "border-accent")}
-          placeholder="Tell me about your organization and what you're hoping to build."
+          placeholder="Tell me a little about your organization and what you need."
           aria-invalid={!!errors.message}
           aria-describedby={errors.message ? "message-err" : undefined}
         />
@@ -206,8 +207,8 @@ export function ContactForm() {
         )}
       </div>
 
-      {/* Honeypot — hidden from humans, catches bots. Do not remove. */}
-      <div className="absolute left-[-9999px] top-[-9999px]" aria-hidden>
+      {/* Honeypot — hidden from humans, catches bots. Contained so it never affects layout. */}
+      <div aria-hidden className="pointer-events-none absolute h-px w-px -translate-x-[9999px] overflow-hidden">
         <label htmlFor="website">Leave this field empty</label>
         <input
           id="website"
@@ -221,22 +222,20 @@ export function ContactForm() {
       </div>
 
       {serverError && (
-        <p className="mt-5 rounded-lg border border-accent/40 bg-accent/5 px-4 py-3 text-sm text-ink" role="alert">
+        <p className="rounded-lg border border-accent/40 bg-accent/5 px-4 py-3 text-sm text-ink" role="alert">
           {serverError}
         </p>
       )}
 
-      <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <Button type="submit" size="lg" disabled={status === "submitting"}>
-          {status === "submitting" ? "Sending…" : "Send message"}
-        </Button>
-        <p className="break-words text-xs text-muted">
-          Or email me at{" "}
-          <a href={`mailto:${siteConfig.email}`} className="font-medium text-ink underline">
-            {siteConfig.email}
-          </a>
-        </p>
-      </div>
+      <Button
+        type="submit"
+        variant="primary"
+        size="lg"
+        className="mt-1 w-full shadow-cta-lg"
+        disabled={status === "submitting"}
+      >
+        {status === "submitting" ? "Sending…" : "Send message"}
+      </Button>
     </form>
   );
 }

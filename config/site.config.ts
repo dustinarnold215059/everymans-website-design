@@ -27,27 +27,40 @@ export const siteConfig = {
   // Swap any value and the whole site follows. (No generic-startup purple here.)
   theme: {
     colors: {
-      ink: "#13302A", // deep evergreen — primary anchor (headers, dark bands)
-      "ink-soft": "#1F4A40", // lighter evergreen for layered dark surfaces
-      accent: "#C9632B", // warm clay/amber — CTAs, highlights
-      "accent-soft": "#E08A4E", // hover / softer accent
-      paper: "#FBF8F2", // warm off-white page background
-      sand: "#F1E9DA", // warm tint for alternating sections / cards
-      line: "#E2D8C5", // hairline borders on light surfaces
-      fg: "#1A1A17", // body text on light
-      muted: "#5F584C", // secondary text on light
-      "on-ink": "#F4EFE6", // text on dark evergreen
-      "on-ink-muted": "#AEC2B8", // secondary text on dark evergreen
+      // ── surfaces ──
+      paper: "#F4EFE4", // canvas / page background (warm cream)
+      surface: "#FCFAF3", // cards, form, browser frames
+      sand: "#EFE8D8", // alternating sections, chips, FAQ band
+      // ── forest (primary dark) ──
+      ink: "#163029", // header text / dark sections / footer / primary buttons
+      "ink-soft": "#20493A", // forest hover; serif accent text
+      sage: "#7FA98C", // footer headings, process numbers, muted accents
+      "sage-deep": "#2E5848", // dividers on dark
+      // ── terracotta (accent) ──
+      accent: "#C5532E", // primary accent, CTA, eyebrows, arrows
+      "accent-hover": "#A8431F", // hover for terracotta button
+      "accent-soft": "#E2A86B", // lighter terracotta (eyebrow on dark, hover on dark)
+      "accent-tint": "#EAD8C9", // hero badge background / glow
+      // ── text ──
+      fg: "#1C1A15", // primary text
+      muted: "#5A554A", // secondary body copy
+      faint: "#837C6E", // captions, labels
+      "on-ink": "#EFE6D2", // text on forest
+      "on-ink-bright": "#FCFAF3", // headings on forest
+      "on-ink-muted": "#A9BBB0", // footer / process body text on dark
+      // ── lines / misc ──
+      line: "#E2D9C5", // card / input borders
+      "line-faint": "#ECE3D0", // inner dividers in cards
+      amber: "#E0B23E", // browser-frame middle dot
     },
   },
 
   // ── Navigation ────────────────────────────────────────────────────────────
   nav: [
     { label: "Work", href: "/#work" },
-    { label: "Case study", href: "/work" },
     { label: "Services", href: "/#services" },
+    { label: "Process", href: "/#process" },
     { label: "About", href: "/#about" },
-    { label: "Contact", href: "/#contact" },
   ],
   primaryCta: { label: "Start a project", href: "/#contact" },
 
@@ -100,7 +113,7 @@ export const siteConfig = {
   // ── How it works ──────────────────────────────────────────────────────────
   process: {
     heading: "How it works",
-    intro: "A simple, predictable path from first conversation to a site you're proud of.",
+    intro: "A simple, predictable path from first conversation to launch — and beyond.",
     steps: [
       {
         title: "Talk",
@@ -141,9 +154,9 @@ export const siteConfig = {
     quote:
       "Dustin built our site from the ground up and still keeps it running. He understood the mission from day one — we never had to explain ourselves.",
     author: "Abolish Abortion Michigan",
-    role: "Client — placeholder quote, swap for a real testimonial",
+    role: "Client · placeholder quote — swap for a real testimonial",
     stats: [
-      { value: "100%", label: "Custom-built, no templates" },
+      { value: "100%", label: "Custom-built — no templates" },
       { value: "Next.js", label: "Modern, fast, and secure" },
       { value: "Always on", label: "Hosting, security & updates handled" },
     ],
@@ -211,9 +224,9 @@ export const siteConfig = {
 
   // ── Contact ───────────────────────────────────────────────────────────────
   contact: {
-    heading: "Start a project",
+    heading: "Tell me what you need and I'll show you what's possible.",
     intro:
-      "Tell me a little about your organization and what you need. I read every message myself and reply personally.",
+      "No jargon, no pressure — just a straight conversation about your mission and your site. I read every message myself and reply personally.",
     needOptions: [
       "New website",
       "Redesign",
@@ -221,9 +234,9 @@ export const siteConfig = {
       "Automation",
       "Not sure",
     ],
-    successTitle: "Thanks — message received.",
+    successTitle: "Message sent.",
     successBody:
-      "I'll get back to you personally, usually within a day or two. If it's urgent, email me directly.",
+      "Thanks for reaching out — I'll read it myself and get back to you personally, usually within a day.",
   },
 
   // ── Footer ────────────────────────────────────────────────────────────────

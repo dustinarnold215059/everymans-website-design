@@ -1,5 +1,5 @@
 import { siteConfig } from "@/config/site.config";
-import { Section, SectionHeading } from "@/components/ui/Section";
+import { Kicker } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { JsonLd } from "@/components/ui/JsonLd";
 
@@ -17,34 +17,41 @@ export function Faq() {
   };
 
   return (
-    <Section id="faq" tone="paper">
+    <section id="faq" className="scroll-mt-[88px] border-y border-line bg-sand">
       <JsonLd data={faqJsonLd} />
-      <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+      <div className="mx-auto max-w-faq px-6 py-[72px] sm:px-7">
         <Reveal>
-          <SectionHeading kicker={faq.heading} title="Good questions get straight answers." intro={faq.intro} />
+          <div className="mx-auto max-w-[30em] text-center">
+            <Kicker>{faq.heading}</Kicker>
+            <h2 className="mt-3 font-display text-[clamp(28px,4.5vw,38px)] font-medium leading-[1.08] tracking-[-0.018em]">
+              Good questions get straight answers.
+            </h2>
+          </div>
         </Reveal>
 
         <Reveal delay={80}>
-          <div className="divide-y divide-line rounded-xl2 border border-line bg-paper shadow-soft">
-            {faq.items.map((item) => (
-              <details key={item.q} className="group px-5 py-1 sm:px-6">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-[15px] font-semibold text-ink marker:hidden [&::-webkit-details-marker]:hidden">
+          <div className="mt-9 flex flex-col gap-3">
+            {faq.items.map((item, i) => (
+              <details
+                key={item.q}
+                open={i === 0}
+                className="group overflow-hidden rounded-[14px] border border-line bg-surface"
+              >
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-[17px] font-bold text-fg marker:hidden [&::-webkit-details-marker]:hidden">
                   {item.q}
                   <span
                     aria-hidden
-                    className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-line text-muted transition-transform duration-200 group-open:rotate-45"
+                    className="flex-none text-[22px] leading-none text-accent transition-transform duration-200 group-open:rotate-45"
                   >
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                      <path d="M12 5v14M5 12h14" />
-                    </svg>
+                    +
                   </span>
                 </summary>
-                <p className="pb-5 pr-10 text-[15px] leading-relaxed text-muted">{item.a}</p>
+                <p className="px-6 pb-[22px] text-[15px] leading-[1.62] text-muted">{item.a}</p>
               </details>
             ))}
           </div>
         </Reveal>
       </div>
-    </Section>
+    </section>
   );
 }

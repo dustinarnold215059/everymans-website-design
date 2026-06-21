@@ -5,18 +5,9 @@ import { useEffect, useState } from "react";
 import { siteConfig } from "@/config/site.config";
 import { Button } from "@/components/ui/Button";
 import { Wordmark } from "./Wordmark";
-import { cn } from "@/lib/cn";
 
 export function Header() {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   // Lock body scroll while the mobile menu is open
   useEffect(() => {
@@ -27,36 +18,26 @@ export function Header() {
   }, [open]);
 
   return (
-    <header
-      className={cn(
-        "sticky top-0 z-50 transition-colors duration-300",
-        scrolled
-          ? "border-b border-line bg-paper/85 backdrop-blur-md"
-          : "border-b border-transparent bg-paper/0",
-      )}
-    >
-      <div className="mx-auto flex h-16 max-w-content items-center justify-between px-5 sm:px-6 lg:px-8">
-        <Link href="/" className="rounded-md" aria-label={`${siteConfig.name} — home`}>
+    <header className="sticky top-0 z-50 border-b border-line bg-paper/85 backdrop-blur-md">
+      <div className="mx-auto flex max-w-content items-center justify-between gap-6 px-6 py-4 sm:px-7">
+        <Link href="/#top" className="rounded-md" aria-label={`${siteConfig.name} — home`}>
           <Wordmark />
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-[30px] md:flex" aria-label="Primary">
           {siteConfig.nav.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm font-medium text-fg/80 transition-colors hover:text-ink"
+              className="text-[14.5px] font-semibold text-muted transition-colors hover:text-ink"
             >
               {item.label}
             </Link>
           ))}
-        </nav>
-
-        <div className="hidden md:block">
-          <Button href={siteConfig.primaryCta.href} size="md">
+          <Button href={siteConfig.primaryCta.href} variant="forest" size="md">
             {siteConfig.primaryCta.label}
           </Button>
-        </div>
+        </nav>
 
         <button
           type="button"
@@ -72,17 +53,16 @@ export function Header() {
         </button>
       </div>
 
-      {/* Mobile menu */}
       {open && (
         <div className="md:hidden">
-          <div className="border-t border-line bg-paper px-5 pb-6 pt-2 shadow-soft">
+          <div className="border-t border-line bg-paper px-6 pb-6 pt-2 shadow-soft">
             <nav className="flex flex-col" aria-label="Mobile">
               {siteConfig.nav.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="border-b border-line/70 py-3 text-base font-medium text-fg"
+                  className="border-b border-line/70 py-3 text-base font-semibold text-fg"
                 >
                   {item.label}
                 </Link>
@@ -90,6 +70,7 @@ export function Header() {
             </nav>
             <Button
               href={siteConfig.primaryCta.href}
+              variant="primary"
               size="lg"
               className="mt-5 w-full"
               onClick={() => setOpen(false)}

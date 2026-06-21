@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Hanken_Grotesk, Newsreader } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { siteConfig } from "@/config/site.config";
 import { Header } from "@/components/layout/Header";
@@ -7,16 +7,17 @@ import { Footer } from "@/components/layout/Footer";
 import { JsonLd } from "@/components/ui/JsonLd";
 import "./globals.css";
 
-const inter = Inter({
+const hanken = Hanken_Grotesk({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
 });
 
-const fraunces = Fraunces({
+const newsreader = Newsreader({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
+  style: ["normal", "italic"],
   axes: ["opsz"],
 });
 
@@ -100,7 +101,7 @@ const orgJsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
+    <html lang="en" className={`${hanken.variable} ${newsreader.variable}`}>
       <body className="min-h-dvh bg-paper">
         <JsonLd data={orgJsonLd} />
         <a

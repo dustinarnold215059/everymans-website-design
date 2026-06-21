@@ -10,7 +10,7 @@
   html {
     scroll-behavior: smooth;
     /* offset for the sticky header when jumping to #anchors */
-    scroll-padding-top: 5.5rem;
+    scroll-padding-top: 88px;
     -webkit-text-size-adjust: 100%;
   }
 
@@ -19,8 +19,13 @@
     text-rendering: optimizeLegibility;
   }
 
-  h1, h2, h3, h4 {
-    @apply font-display tracking-tight text-ink;
+  /* Headings inherit color only — components pick serif (font-display) for H1/H2
+     and sans (font-sans) for card/process H3s, per the design. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-ink;
     text-wrap: balance;
   }
 
@@ -28,14 +33,13 @@
     text-wrap: pretty;
   }
 
-  /* Visible, accessible focus ring */
   :focus-visible {
     @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-paper;
   }
 
   ::selection {
     background-color: theme("colors.accent");
-    color: theme("colors.on-ink");
+    color: theme("colors.on-ink-bright");
   }
 }
 

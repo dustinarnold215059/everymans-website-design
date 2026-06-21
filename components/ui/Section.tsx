@@ -26,23 +26,22 @@ export function Section({
   return (
     <section
       id={id}
-      className={cn("scroll-mt-24 py-20 sm:py-24 lg:py-28", toneClasses[tone], className)}
+      className={cn("scroll-mt-[88px] py-16 sm:py-[74px]", toneClasses[tone], className)}
     >
       <Container className={containerClassName}>{children}</Container>
     </section>
   );
 }
 
-/** Small eyebrow/kicker label used above section headings. */
+/** Uppercase terracotta eyebrow. On dark surfaces it uses the lighter terracotta. */
 export function Kicker({ children, onInk = false }: { children: ReactNode; onInk?: boolean }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em]",
+        "text-[12.5px] font-bold uppercase tracking-[0.14em]",
         onInk ? "text-accent-soft" : "text-accent",
       )}
     >
-      <span className={cn("h-px w-6", onInk ? "bg-accent-soft" : "bg-accent")} aria-hidden />
       {children}
     </span>
   );
@@ -66,14 +65,16 @@ export function SectionHeading({
       {kicker ? <Kicker onInk={onInk}>{kicker}</Kicker> : null}
       <h2
         className={cn(
-          "mt-4 text-3xl sm:text-4xl lg:text-[2.75rem] leading-[1.05]",
-          onInk && "text-on-ink",
+          "mt-3 font-display text-[clamp(30px,5vw,40px)] font-medium leading-[1.08] tracking-[-0.018em]",
+          onInk ? "text-on-ink-bright" : "text-ink",
         )}
       >
         {title}
       </h2>
       {intro ? (
-        <p className={cn("mt-4 text-lg", onInk ? "text-on-ink-muted" : "text-muted")}>{intro}</p>
+        <p className={cn("mt-3.5 text-base leading-[1.55]", onInk ? "text-on-ink-muted" : "text-muted")}>
+          {intro}
+        </p>
       ) : null}
     </div>
   );

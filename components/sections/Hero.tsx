@@ -1,104 +1,103 @@
+import Image from "next/image";
 import { siteConfig } from "@/config/site.config";
+import { blurData } from "@/config/blur";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
-import { Screenshot } from "@/components/ui/Screenshot";
-import { IconArrowRight, IconBolt, IconShield, IconCheck } from "@/components/ui/icons";
+
+const FEATURES = ["Fast, Lighthouse-friendly", "Secure by default", "Built & maintained by me"];
 
 export function Hero() {
-  const { hero } = siteConfig;
+  const { hero, trust, featured } = siteConfig;
+
+  // Italicize the closing phrase of the headline, per the design.
+  const emph = "gets the mission.";
+  const idx = hero.headline.lastIndexOf(emph);
+  const pre = idx >= 0 ? hero.headline.slice(0, idx) : hero.headline;
+  const hasEmph = idx >= 0;
 
   return (
-    <section className="relative overflow-hidden">
-      {/* warm, low-key background wash — no generic purple gradient */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(80% 60% at 85% 0%, rgba(201,99,43,0.10), transparent 60%)," +
-            "radial-gradient(70% 60% at 0% 10%, rgba(19,48,42,0.06), transparent 55%)",
-        }}
-      />
-
-      <Container className="pb-16 pt-16 sm:pt-20 lg:pb-24 lg:pt-28">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+    <section id="top" className="relative scroll-mt-[88px]">
+      <Container className="pb-10 pt-[72px] lg:pb-[40px]">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-14">
           {/* Copy */}
           <div>
             <Reveal>
-              <span className="inline-flex items-center gap-2 rounded-full border border-line bg-paper/70 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-muted">
+              <span className="inline-flex items-center gap-[9px] rounded-full bg-accent-tint px-3.5 py-[7px] text-[12.5px] font-bold tracking-[0.02em] text-accent-hover">
                 <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden />
                 {hero.eyebrow}
               </span>
             </Reveal>
 
             <Reveal delay={60}>
-              <h1 className="mt-6 text-4xl leading-[1.04] sm:text-5xl lg:text-6xl">
-                {hero.headline}
+              <h1 className="mt-[22px] font-display text-[clamp(36px,7vw,58px)] font-medium leading-[1.04] tracking-[-0.02em]">
+                {pre}
+                {hasEmph && <span className="italic text-ink-soft">{emph}</span>}
               </h1>
             </Reveal>
 
             <Reveal delay={120}>
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted">{hero.subhead}</p>
+              <p className="mt-6 max-w-[30em] text-[19px] leading-[1.6] text-muted">{hero.subhead}</p>
             </Reveal>
 
             <Reveal delay={180}>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-[30px] flex flex-wrap gap-3.5">
                 <Button href={hero.primary.href} size="lg" variant="primary">
                   {hero.primary.label}
-                  <IconArrowRight width={18} height={18} />
                 </Button>
-                <Button href={hero.secondary.href} size="lg" variant="ghost">
+                <Button href={hero.secondary.href} size="lg" variant="outline">
                   {hero.secondary.label}
                 </Button>
               </div>
             </Reveal>
 
             <Reveal delay={240}>
-              <ul className="mt-9 flex flex-wrap gap-x-6 gap-y-3 text-sm text-muted">
-                <li className="inline-flex items-center gap-2">
-                  <IconBolt width={18} height={18} className="text-accent" />
-                  Fast, Lighthouse-friendly
-                </li>
-                <li className="inline-flex items-center gap-2">
-                  <IconShield width={18} height={18} className="text-accent" />
-                  Secure by default
-                </li>
-                <li className="inline-flex items-center gap-2">
-                  <IconCheck width={18} height={18} className="text-accent" />
-                  Built &amp; maintained by me
-                </li>
-              </ul>
+              <div className="mt-[34px] flex flex-wrap gap-x-[22px] gap-y-3">
+                {FEATURES.map((f) => (
+                  <span key={f} className="flex items-center gap-2 text-[14px] font-semibold text-muted">
+                    <span className="text-ink-soft" aria-hidden>
+                      ✦
+                    </span>
+                    {f}
+                  </span>
+                ))}
+              </div>
             </Reveal>
           </div>
 
-          {/* Visual */}
+          {/* Faux-browser preview with the real AAM screenshot */}
           <Reveal delay={150} className="relative">
-            <div className="relative">
-              <div className="absolute -inset-3 -z-10 rounded-[1.75rem] bg-ink/5 blur-2xl" aria-hidden />
-              <div className="rounded-xl2 border border-line bg-paper p-3 shadow-lift">
-                {/* faux browser chrome */}
-                <div className="flex items-center gap-1.5 px-2 pb-3 pt-1">
-                  <span className="h-2.5 w-2.5 rounded-full bg-line" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-line" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-line" />
-                  <span className="ml-3 h-5 flex-1 rounded-full bg-sand" />
-                </div>
-                <Screenshot
-                  src={siteConfig.featured.image}
-                  alt={`${siteConfig.featured.title} — homepage built by ${siteConfig.name}`}
-                  ratio="16/10"
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -right-6 -top-6 z-0 h-[130px] w-[130px]"
+              style={{ background: "radial-gradient(circle, #EAD8C9 0%, transparent 70%)" }}
+            />
+            <div className="relative z-[1] overflow-hidden rounded-[16px] border border-line bg-surface shadow-float animate-float motion-reduce:animate-none">
+              <div className="flex items-center gap-[7px] border-b border-line bg-sand px-3.5 py-3">
+                <span className="h-2.5 w-2.5 rounded-full bg-accent" />
+                <span className="h-2.5 w-2.5 rounded-full bg-amber" />
+                <span className="h-2.5 w-2.5 rounded-full bg-sage" />
+                <span className="ml-2.5 flex h-[18px] flex-1 items-center rounded-md bg-paper px-2.5 text-[10.5px] font-semibold text-faint">
+                  abolishabortionmichigan.com
+                </span>
+              </div>
+              <div className="relative aspect-[16/11] w-full bg-sand">
+                <Image
+                  src={featured.image}
+                  alt={`${featured.title} — homepage built by ${siteConfig.name}`}
+                  fill
                   priority
-                  sizes="(max-width: 1024px) 100vw, 560px"
+                  sizes="(max-width: 1024px) 100vw, 520px"
+                  placeholder="blur"
+                  blurDataURL={blurData[featured.image]}
+                  className="object-cover object-top"
                 />
               </div>
-
-              {/* floating proof chip */}
-              <div className="absolute -bottom-5 -left-4 hidden rounded-xl border border-line bg-paper px-4 py-3 shadow-soft sm:block">
-                <p className="text-xs font-semibold uppercase tracking-wide text-muted">Live project</p>
-                <p className="text-sm font-semibold text-ink">Abolish Abortion Michigan</p>
-              </div>
             </div>
+            <p className="relative z-[1] mt-4 text-center text-[13px] font-semibold text-faint">
+              {trust.line.replace(/Abolish Abortion Michigan\.?$/, "")}
+              <span className="text-fg">Abolish Abortion Michigan.</span>
+            </p>
           </Reveal>
         </div>
       </Container>

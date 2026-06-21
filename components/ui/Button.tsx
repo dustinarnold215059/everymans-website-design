@@ -2,22 +2,22 @@ import Link from "next/link";
 import { cn } from "@/lib/cn";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
-type Variant = "primary" | "secondary" | "ghost" | "onInk";
+type Variant = "primary" | "forest" | "outline" | "onInk";
 type Size = "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:opacity-60 disabled:pointer-events-none";
+  "inline-flex items-center justify-center gap-2 rounded-full font-bold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:opacity-60 disabled:pointer-events-none";
 
 const sizes: Record<Size, string> = {
-  md: "px-5 py-2.5 text-sm",
-  lg: "px-6 py-3.5 text-base",
+  md: "px-[18px] py-[10px] text-[14.5px]",
+  lg: "px-[26px] py-[15px] text-[15.5px]",
 };
 
 const variants: Record<Variant, string> = {
-  primary: "bg-accent text-on-ink hover:bg-accent-soft shadow-soft",
-  secondary: "bg-ink text-on-ink hover:bg-ink-soft shadow-soft",
-  ghost:
-    "bg-transparent text-ink border border-line hover:border-ink hover:bg-sand/60",
+  primary: "bg-accent text-on-ink-bright hover:bg-accent-hover shadow-cta",
+  forest: "bg-ink text-on-ink-bright hover:bg-ink-soft",
+  outline:
+    "bg-transparent text-ink border-[1.5px] border-ink hover:bg-ink hover:text-on-ink-bright",
   onInk:
     "bg-transparent text-on-ink border border-on-ink/30 hover:border-on-ink hover:bg-on-ink/10",
 };

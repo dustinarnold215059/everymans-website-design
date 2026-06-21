@@ -21,7 +21,7 @@ export default function Error({
       <p className="text-sm font-semibold uppercase tracking-[0.16em] text-accent">
         Something broke
       </p>
-      <h1 className="mt-4 text-4xl sm:text-5xl">Well, that wasn&apos;t supposed to happen.</h1>
+      <h1 className="mt-4 font-display text-4xl font-medium sm:text-5xl">Well, that wasn&apos;t supposed to happen.</h1>
       <p className="mt-4 max-w-md text-muted">
         A hiccup on my end. Try again, and if it keeps happening, send me a quick note.
       </p>
@@ -29,7 +29,7 @@ export default function Error({
         <Button onClick={() => reset()} size="lg">
           Try again
         </Button>
-        <Button href="/#contact" size="lg" variant="ghost">
+        <Button href="/#contact" size="lg" variant="outline">
           Contact me
         </Button>
       </div>
