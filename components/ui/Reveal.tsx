@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState, type ElementType, type ReactNode } from "react";
+import { useEffect, useRef, type ElementType, type ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
 /**
  * Lightweight scroll-reveal. No animation library — just an IntersectionObserver
- * that toggles a CSS class (see .reveal in globals.css). Respects reduced motion.
- *
- * `delay` staggers grouped items (ms).
+ * that toggles the `is-visible` class imperatively (see .reveal in globals.css).
+ * Using the DOM ref instead of state avoids an extra render and respects reduced
+ * motion. `delay` staggers grouped items (ms).
  */
 export function Reveal({
   children,
@@ -21,14 +21,13 @@ export function Reveal({
   className?: string;
 }) {
   const ref = useRef<HTMLElement | null>(null);
-  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
     if (typeof IntersectionObserver === "undefined") {
-      setVisible(true);
+      el.classList.add("is-visible");
       return;
     }
 
@@ -36,7 +35,7 @@ export function Reveal({
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            setVisible(true);
+            el.classList.add("is-visible");
             observer.disconnect();
           }
         }
@@ -51,7 +50,7 @@ export function Reveal({
   return (
     <Tag
       ref={ref}
-      className={cn("reveal", visible && "is-visible", className)}
+      className={cn("reveal", className)}
       style={delay ? { transitionDelay: `${delay}ms` } : undefined}
     >
       {children}

@@ -76,7 +76,12 @@ export function Footer() {
           <p>
             © {year} {siteConfig.name}. All rights reserved.
           </p>
-          <p>{siteConfig.domain}</p>
+          <div className="flex items-center gap-4">
+            <Link href="/privacy" className="transition-colors hover:text-accent-soft">
+              Privacy
+            </Link>
+            <span>{siteConfig.domain}</span>
+          </div>
         </div>
       </Container>
     </footer>

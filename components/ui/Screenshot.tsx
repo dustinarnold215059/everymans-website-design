@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { cn } from "@/lib/cn";
+import { blurData } from "@/config/blur";
 
 /**
  * A real screenshot rendered with next/image, framed to match PlaceholderImage.
@@ -23,6 +24,7 @@ export function Screenshot({
   sizes?: string;
 }) {
   const dark = tone === "dark";
+  const blur = blurData[src];
   return (
     <div
       className={cn(
@@ -38,6 +40,8 @@ export function Screenshot({
         fill
         priority={priority}
         sizes={sizes ?? "(max-width: 1024px) 100vw, 720px"}
+        placeholder={blur ? "blur" : "empty"}
+        blurDataURL={blur}
         className="object-cover object-top"
       />
     </div>
