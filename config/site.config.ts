@@ -57,9 +57,10 @@ export const siteConfig = {
 
   // ── Navigation ────────────────────────────────────────────────────────────
   nav: [
-    { label: "Work", href: "/#work" },
     { label: "Services", href: "/#services" },
     { label: "Process", href: "/#process" },
+    { label: "Work", href: "/#work" },
+    { label: "Case study", href: "/work" },
     { label: "About", href: "/#about" },
   ],
   primaryCta: { label: "Start a project", href: "/#contact" },
