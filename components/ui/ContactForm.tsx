@@ -68,7 +68,11 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="rounded-xl2 border border-line bg-paper p-8 text-center shadow-soft">
+      <div
+        role="status"
+        aria-live="polite"
+        className="rounded-xl2 border border-line bg-paper p-8 text-center shadow-soft"
+      >
         <div className="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-full bg-accent/15 text-accent">
           <IconCheck width={26} height={26} />
         </div>

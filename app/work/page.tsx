@@ -19,6 +19,15 @@ export const metadata: Metadata = {
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? siteConfig.url;
 
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: `${siteUrl}/` },
+    { "@type": "ListItem", position: 2, name: "Work", item: `${siteUrl}/work` },
+  ],
+};
+
 const workJsonLd = {
   "@context": "https://schema.org",
   "@type": "ItemList",
@@ -41,6 +50,7 @@ const workJsonLd = {
 export default function WorkPage() {
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd} />
       <JsonLd data={workJsonLd} />
       {/* Page header */}
       <section className="border-b border-line bg-paper">
