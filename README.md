@@ -74,7 +74,7 @@ Copy `.env.example` → `.env.local` and fill in:
 | --- | --- | --- |
 | `RESEND_API_KEY` | Yes (to send mail) | Resend API key — https://resend.com/api-keys |
 | `EMAIL_TO` | Yes | Inbox that receives contact-form submissions |
-| `EMAIL_FROM` | Recommended | Verified Resend sender, e.g. `hello@everymanswebsitedesign.com`. Use `onboarding@resend.dev` for quick testing |
+| `EMAIL_FROM` | Recommended | Verified Resend sender, e.g. `contact@everymanswebsitedesign.com`. Use `onboarding@resend.dev` for quick testing |
 | `UPSTASH_REDIS_REST_URL` | Optional | Upstash Redis REST URL (enables rate limiting) |
 | `UPSTASH_REDIS_REST_TOKEN` | Optional | Upstash Redis REST token |
 | `NEXT_PUBLIC_SITE_URL` | Recommended | Canonical site URL for SEO/OG/sitemap, e.g. `https://everymanswebsitedesign.com` |
