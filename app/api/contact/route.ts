@@ -3,6 +3,7 @@ import { validateContact } from "@/lib/validation";
 import { checkRateLimit } from "@/lib/rateLimit";
 import { verifyTurnstile } from "@/lib/turnstile";
 import { sendContactEmail, sendContactAutoReply } from "@/lib/resend";
+import { saveLead } from "@/lib/leads";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -67,7 +68,24 @@ export async function POST(req: Request) {
     );
   }
 
-  // 6) Send the inquiry to the owner via Resend
+  // 6) Persist the lead FIRST. The database is the durable record: if Resend is
+  //    down, a stored row means the lead still exists and can be answered by
+  //    hand. Doing it after the email meant an email failure lost the inquiry
+  //    entirely — no message, no row, no trace it ever arrived.
+  //    Still best-effort: a database problem must not cost the email.
+  const stored = await saveLead({
+    name: result.value.name,
+    organization: result.value.organization,
+    email: result.value.email,
+    need: result.value.need,
+    message: result.value.message,
+    sourcePath: result.value.sourcePath,
+  });
+  if (!stored.saved && stored.reason !== "DATABASE_URL not set") {
+    console.error("[contact] lead not stored:", stored.reason);
+  }
+
+  // 7) Send the inquiry to the owner via Resend
   try {
     await sendContactEmail(result.value);
   } catch (err) {
@@ -78,7 +96,7 @@ export async function POST(req: Request) {
     );
   }
 
-  // 7) Best-effort confirmation to the sender — never fail the request for this
+  // 8) Best-effort confirmation to the sender — never fail the request for this
   try {
     await sendContactAutoReply({ name: result.value.name, email: result.value.email });
   } catch (err) {
