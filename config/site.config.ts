@@ -16,7 +16,9 @@ export const siteConfig = {
   shortName: "Every Man's",
   domain: "everymanswebsitedesign.com",
   url: "https://everymanswebsitedesign.com",
-  email: "Everymanswebsitedesign@gmail.com", // shown on the site + Contact section
+  // Proton mailbox on the domain. Shown on the site and used as the contact
+  // address; the Resend sender is set separately via EMAIL_FROM.
+  email: "contact@everymanswebsitedesign.com",
   tagline: "Websites that do the work — built by someone who gets the mission.",
   // Site-wide, so it must cover BOTH audiences — it feeds the layout metadata,
   // the Organization JSON-LD, and the manifest, all of which render on /business.
