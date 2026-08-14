@@ -7,6 +7,8 @@ type ContactEmailInput = {
   email: string;
   need: string;
   message: string;
+  /** Page the form was submitted from, e.g. "/business/dearborn". */
+  sourcePath?: string;
 };
 
 const escapeHtml = (s: string) =>
@@ -37,6 +39,7 @@ export async function sendContactEmail(input: ContactEmailInput): Promise<void> 
     ["Organization", org],
     ["Email", input.email],
     ["Need", input.need],
+    ["Page", input.sourcePath || "—"],
   ];
 
   const html = `

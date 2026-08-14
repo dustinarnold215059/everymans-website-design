@@ -223,6 +223,14 @@ export const businessContent = {
         a: "Usually, yes. Sometimes the fix is small — a broken link on your Google listing, or a site that doesn't work on phones. Sometimes it's easier to rebuild. I'll tell you honestly which one you're looking at, even when it's the cheaper answer.",
       },
       {
+        q: "My nephew could build one on Wix for free. Why pay you?",
+        a: "If you've got someone who will actually keep it updated, use them — I mean that. The build isn't the hard part. What usually happens is the site goes up, then he gets busy or moves, and two years later your hours are wrong, the phone number is old, and nobody knows the login. You also end up on an address with the builder's name in the middle of it, which tells customers you didn't finish. What you're paying me for is that it gets built properly once and then stays right, with one person to call when it doesn't.",
+      },
+      {
+        q: "How do I know you'll still be around in a year?",
+        a: "Fair question, and here's the honest answer: you don't, so I build it so it doesn't matter. The domain and the site are on your accounts, not mine. It's built on standard tools any web developer can pick up — no proprietary system that only I can touch. The care plan is month to month with no contract. If I vanished tomorrow you'd still own everything and could hand it to anyone.",
+      },
+      {
         q: "What if I don't have any photos?",
         a: "That's normal. We can start with what you have, and I'll tell you exactly which few shots would make the biggest difference. A handful of decent phone photos of your actual work beats stock photography every time.",
       },
