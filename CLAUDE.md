@@ -46,7 +46,17 @@ replacing anything in `public/work`; do not hand-edit it.
 
 Contact form submissions go through Resend (`lib/resend.ts`, `app/api/contact/route.ts`).
 
-**Resend DNS verification was still pending as of 2026-06.** If contact-form email isn't arriving, check the domain's verification status in Resend before debugging the route — the code path has been working while the sending domain was not yet verified. The domain was transferred to Vercel around 2026-06-20, so DNS records live there.
+DNS is fully configured as of 2026-08: **Proton** receives (MX, SPF, three DKIM
+selectors, DMARC `p=quarantine`) and **Resend** is verified for sending
+(`resend._domainkey` DKIM, `send.<domain>` SPF + bounce MX). The domain was
+transferred to Vercel around 2026-06-20, so DNS records live there.
+
+The contact address is `contact@everymanswebsitedesign.com` (Proton).
+
+**If the contact form 500s, it is the environment, not DNS.** `sendContactEmail`
+throws when `RESEND_API_KEY` or `EMAIL_TO` is missing, and `EMAIL_FROM` falls
+back to `onboarding@resend.dev`, which Resend will only deliver to the account
+owner's own address. All three must be set in Vercel.
 
 ## Pushing
 
