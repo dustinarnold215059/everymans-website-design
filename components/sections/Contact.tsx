@@ -50,6 +50,23 @@ export function Contact({ content = siteConfig }: { content?: PageContent }) {
               </div>
             ) : null}
 
+            {/* Click-to-call. A local owner reading this at 9pm will call, not
+                fill in a form — but only render it when a number exists, so the
+                site never shows a dead one. */}
+            {siteConfig.phone.tel ? (
+              <div className="mt-[30px] rounded-[14px] border border-line bg-sand px-[22px] py-[18px]">
+                <div className="text-[12.5px] font-bold uppercase tracking-[0.08em] text-faint">
+                  Rather just call?
+                </div>
+                <a
+                  href={`tel:${siteConfig.phone.tel}`}
+                  className="mt-1 inline-block break-words border-b-2 border-accent text-[16px] font-bold text-ink"
+                >
+                  {siteConfig.phone.display || siteConfig.phone.tel}
+                </a>
+              </div>
+            ) : null}
+
             <div className="mt-[30px] rounded-[14px] border border-line bg-sand px-[22px] py-[18px]">
               <div className="text-[12.5px] font-bold uppercase tracking-[0.08em] text-faint">Prefer email?</div>
               <a

@@ -102,6 +102,20 @@ export const siteConfig = {
   // Empty string disables the widget.
   turnstileSiteKey: "0x4AAAAAAEQJkJSZE9z3YM7i",
 
+  // ── Google Business Profile ───────────────────────────────────────────────
+  // Place ID for the verified GBP. Once set (with GOOGLE_PLACES_API_KEY in the
+  // environment) real Google reviews replace the written testimonial in the
+  // proof section. Empty = keep using the written one.
+  // Find it at https://developers.google.com/maps/documentation/places/web-service/place-id
+  googlePlaceId: "",
+
+  // ── Phone ─────────────────────────────────────────────────────────────────
+  // Click-to-call. A local owner reads the site at 9pm and wants to call, not
+  // fill in a form. Empty hides every phone affordance, so the site never shows
+  // a dead number.
+  // `tel` is the dial string; `display` is what a human reads.
+  phone: { tel: "", display: "" },
+
   booking: {
     url: "", // e.g. "https://cal.com/dustin/intro" or "https://calendly.com/…"
     label: "Book a 15-min call",
