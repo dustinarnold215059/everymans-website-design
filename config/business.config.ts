@@ -97,7 +97,7 @@ export const businessContent = {
     body: "A working Metro Detroit photography business: portfolio galleries, transparent pricing, an inquiry form that actually gets answered, private client galleries with downloads, and online payments. Built to book clients while she's out shooting.",
     tags: ["Booking inquiries", "Client galleries", "Online payments", "Google reviews", "Next.js"],
     image: "/work/mra-home.jpg",
-    caseStudyHref: "/work",
+    caseStudyHref: "/business/work",
   },
 
   // ── Proof ─────────────────────────────────────────────────────────────────

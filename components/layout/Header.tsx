@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { siteConfig } from "@/config/site.config";
-import { AUDIENCES, audienceFor, otherAudience } from "@/config/navigation";
+import { AUDIENCES, audienceFor } from "@/config/navigation";
 import { Button } from "@/components/ui/Button";
 import { Wordmark } from "./Wordmark";
 
@@ -16,7 +16,6 @@ export function Header() {
   // the visitor is on. Shared pages (/work, /privacy) fall back to ministries
   // rather than showing no nav at all.
   const audience = audienceFor(pathname) ?? AUDIENCES.ministries;
-  const other = otherAudience(audience.key);
   const onChooser = pathname === "/";
 
   // Lock body scroll while the mobile menu is open
@@ -49,6 +48,7 @@ export function Header() {
               {item.label}
             </Link>
           ))}
+          {/* No cross-audience switcher: the two sides must not reference each other. */}
           {onChooser ? (
             <>
               <Link
@@ -62,17 +62,9 @@ export function Header() {
               </Button>
             </>
           ) : (
-            <>
-              <Link
-                href={other.base}
-                className="text-[14.5px] font-semibold text-faint underline decoration-line underline-offset-4 transition-colors hover:text-ink"
-              >
-                {other.switchLabel}
-              </Link>
-              <Button href={audience.cta.href} variant="forest" size="md">
-                {audience.cta.label}
-              </Button>
-            </>
+            <Button href={audience.cta.href} variant="forest" size="md">
+              {audience.cta.label}
+            </Button>
           )}
         </nav>
 
@@ -104,13 +96,6 @@ export function Header() {
                   {item.label}
                 </Link>
               ))}
-              <Link
-                href={other.base}
-                onClick={() => setOpen(false)}
-                className="border-b border-line/70 py-3 text-base font-semibold text-faint"
-              >
-                {other.switchLabel}
-              </Link>
             </nav>
             <Button
               href={audience.cta.href}

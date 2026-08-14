@@ -4,7 +4,15 @@
  * edits required. `slug` must be unique.
  */
 
+export type Audience = "ministries" | "business";
+
 export type CaseStudy = {
+  /**
+   * Which landing page may show this. The two sides are kept strictly separate:
+   * abolition work is controversial and must never surface to a local-business
+   * prospect who was handed a card. Nothing is shown on both.
+   */
+  audience: Audience;
   slug: string;
   name: string;
   url: string;
@@ -25,6 +33,7 @@ export type CaseStudy = {
 
 export const caseStudies: CaseStudy[] = [
   {
+    audience: "ministries",
     slug: "abolish-abortion-michigan",
     name: "Abolish Abortion Michigan",
     url: "https://abolishabortionmichigan.com",
@@ -59,6 +68,7 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
+    audience: "business",
     slug: "mra-photography",
     name: "MRA Photography",
     url: "https://www.photographymra.com",
@@ -93,6 +103,7 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
+    audience: "business",
     slug: "arnold-family-recipes",
     name: "Our Family Table",
     url: "https://arnoldfamilyrecipes.org",
@@ -126,4 +137,9 @@ export const caseStudies: CaseStudy[] = [
 
 export function getCaseStudy(slug: string): CaseStudy | undefined {
   return caseStudies.find((c) => c.slug === slug);
+}
+
+/** Case studies one audience is allowed to see. Never returns the other's. */
+export function caseStudiesFor(audience: Audience): CaseStudy[] {
+  return caseStudies.filter((c) => c.audience === audience);
 }

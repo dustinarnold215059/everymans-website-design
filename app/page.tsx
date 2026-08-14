@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { siteConfig } from "@/config/site.config";
 import { businessContent } from "@/config/business.config";
-import { blurData } from "@/config/blur";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Kicker } from "@/components/ui/Section";
@@ -25,8 +23,13 @@ export const metadata: Metadata = {
  * one homepage that half-speaks to each, this page asks one question and sends
  * the visitor to a landing page written for them.
  *
- * Deliberately short: it is a signpost, not a sales page. Both cards carry a
- * real screenshot so the choice is visual as well as verbal.
+ * Deliberately short: it is a signpost, not a sales page.
+ *
+ * The cards are text-only on purpose. They previously carried a screenshot of
+ * each side's case study, but the ministries one renders "ABOLISH ABORTION
+ * MICHIGAN" in large type — and this page is what anyone typing the bare domain
+ * lands on, including a local-business prospect. Nothing here names either
+ * client.
  */
 const DOORS = [
   {
@@ -35,8 +38,6 @@ const DOORS = [
     title: "My work has a mission.",
     body: siteConfig.hero.subhead,
     points: ["Petitions & signups", "Donations & events", "Content you can update"],
-    proof: siteConfig.trust.emphasis,
-    image: siteConfig.featured.image,
     cta: "For ministries",
   },
   {
@@ -45,8 +46,6 @@ const DOORS = [
     title: "My customers need to find me.",
     body: businessContent.hero.subhead,
     points: ["Works on phones first", "Click-to-call & directions", "Fixed price, said up front"],
-    proof: businessContent.trust.emphasis,
-    image: businessContent.featured.image,
     cta: "For local business",
   },
 ] as const;
@@ -76,19 +75,7 @@ export default function ChooserPage() {
                 href={door.href}
                 className="group flex h-full flex-col overflow-hidden rounded-[18px] border border-line bg-surface transition-colors duration-200 hover:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
               >
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-sand">
-                  <Image
-                    src={door.image}
-                    alt=""
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 560px"
-                    placeholder="blur"
-                    blurDataURL={blurData[door.image]}
-                    className="object-cover object-top"
-                  />
-                </div>
-
-                <div className="flex flex-1 flex-col px-[26px] pb-7 pt-[26px]">
+                <div className="flex flex-1 flex-col px-[26px] pb-7 pt-[30px]">
                   <Kicker>{door.kicker}</Kicker>
                   <h2 className="mt-3 font-display text-[26px] font-medium leading-[1.15] tracking-[-0.015em]">
                     {door.title}
@@ -106,13 +93,10 @@ export default function ChooserPage() {
                     ))}
                   </div>
 
-                  <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
+                  <div className="mt-6">
                     <span className="inline-flex items-center gap-2 rounded-full bg-ink px-[18px] py-[10px] text-[14.5px] font-bold text-on-ink-bright transition-colors group-hover:bg-ink-soft">
                       {door.cta}
                       <span aria-hidden>→</span>
-                    </span>
-                    <span className="text-[12.5px] font-semibold text-faint">
-                      Built {door.proof.replace(/\.$/, "")}
                     </span>
                   </div>
                 </div>
@@ -124,7 +108,7 @@ export default function ChooserPage() {
         <Reveal delay={200}>
           <p className="mt-10 text-[14.5px] text-muted">
             Not sure which?{" "}
-            <Button href="/ministries#contact" variant="outline" size="md" className="ml-1 align-middle">
+            <Button href={`mailto:${siteConfig.email}`} variant="outline" size="md" className="ml-1 align-middle">
               Just ask me
             </Button>
           </p>

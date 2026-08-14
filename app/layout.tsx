@@ -24,9 +24,10 @@ const newsreader = Newsreader({
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? siteConfig.url;
 
 // Search/social title — kept concise and keyword-forward (independent of the hero tagline).
-// Site-wide fallback only. Each landing page sets its own audience-specific
-// title; this covers shared pages (/work, /privacy) and must not claim a side.
-const seoTitle = `${siteConfig.name} — Web Design for Ministries & Local Businesses`;
+// Site-wide fallback, rendered on BOTH landing pages via the title template and
+// openGraph, so it must not name either audience — the two sides are kept
+// strictly separate. Each landing page sets its own audience-specific title.
+const seoTitle = `${siteConfig.name} — Custom Websites, Built and Maintained by One Person`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -38,6 +39,8 @@ export const metadata: Metadata = {
   applicationName: siteConfig.name,
   authors: [{ name: "Dustin" }],
   creator: "Dustin",
+  // Site-wide keywords must stay audience-neutral — they render on /business
+  // too. Ministry terms live on the /ministries page metadata.
   keywords: [
     "web design",
     "small business website design",
@@ -45,11 +48,6 @@ export const metadata: Metadata = {
     "Metro Detroit web design",
     "website design",
     "Next.js developer",
-    "church website",
-    "ministry website",
-    "nonprofit website",
-    "abolition movement website",
-    "mission-driven web design",
   ],
   openGraph: {
     type: "website",
