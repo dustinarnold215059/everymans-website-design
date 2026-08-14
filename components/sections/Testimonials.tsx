@@ -1,10 +1,11 @@
 import { siteConfig } from "@/config/site.config";
+import type { PageContent } from "@/config/page-content";
 import { Container } from "@/components/ui/Container";
 import { Kicker } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 
-export function Testimonials() {
-  const { proof } = siteConfig;
+export function Testimonials({ content = siteConfig }: { content?: PageContent }) {
+  const { proof } = content;
 
   const emph = "we never had to explain ourselves.";
   const idx = proof.quote.lastIndexOf(emph);

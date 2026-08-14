@@ -13,7 +13,7 @@ import { IconCheck, IconArrowUpRight } from "@/components/ui/icons";
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "Case studies from Every Man's Website Design — including Abolish Abortion Michigan, built from the ground up on Next.js and Vercel.",
+    "Case studies from Every Man's Website Design — Abolish Abortion Michigan, MRA Photography, and Our Family Table, each built from the ground up on Next.js and Vercel.",
   alternates: { canonical: "/work" },
 };
 

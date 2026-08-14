@@ -1,10 +1,11 @@
 import { siteConfig } from "@/config/site.config";
+import type { PageContent } from "@/config/page-content";
 import { Container } from "@/components/ui/Container";
 import { Kicker } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 
-export function WhoIServe() {
-  const { audience } = siteConfig;
+export function WhoIServe({ content = siteConfig }: { content?: PageContent }) {
+  const { audience } = content;
 
   return (
     <section id="who" className="pb-16">
@@ -13,7 +14,7 @@ export function WhoIServe() {
           <div className="mx-auto max-w-[30em] text-center">
             <Kicker>{audience.heading}</Kicker>
             <h2 className="mt-3 font-display text-[clamp(28px,4.5vw,38px)] font-medium leading-[1.08] tracking-[-0.018em]">
-              If your work matters, your website should too.
+              {audience.title}
             </h2>
           </div>
         </Reveal>

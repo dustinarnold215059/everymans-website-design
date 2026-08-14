@@ -24,7 +24,9 @@ const newsreader = Newsreader({
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? siteConfig.url;
 
 // Search/social title — kept concise and keyword-forward (independent of the hero tagline).
-const seoTitle = `${siteConfig.name} — Web Design for Ministries & Nonprofits`;
+// Site-wide fallback only. Each landing page sets its own audience-specific
+// title; this covers shared pages (/work, /privacy) and must not claim a side.
+const seoTitle = `${siteConfig.name} — Web Design for Ministries & Local Businesses`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -38,6 +40,9 @@ export const metadata: Metadata = {
   creator: "Dustin",
   keywords: [
     "web design",
+    "small business website design",
+    "local business website",
+    "Metro Detroit web design",
     "website design",
     "Next.js developer",
     "church website",
@@ -46,7 +51,6 @@ export const metadata: Metadata = {
     "abolition movement website",
     "mission-driven web design",
   ],
-  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     url: siteUrl,

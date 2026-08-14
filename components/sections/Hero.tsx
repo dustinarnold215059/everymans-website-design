@@ -1,20 +1,24 @@
 import Image from "next/image";
 import { siteConfig } from "@/config/site.config";
+import type { PageContent } from "@/config/page-content";
 import { blurData } from "@/config/blur";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 
-const FEATURES = ["Fast, Lighthouse-friendly", "Secure by default", "Built & maintained by me"];
+export function Hero({ content = siteConfig }: { content?: PageContent }) {
+  const { hero, trust, featured } = content;
 
-export function Hero() {
-  const { hero, trust, featured } = siteConfig;
-
-  // Italicize the closing phrase of the headline, per the design.
-  const emph = "gets the mission.";
+  // Italicize the closing phrase of the headline, per the design. The phrase
+  // comes from config because each audience has its own headline.
+  const emph = hero.emphasis;
   const idx = hero.headline.lastIndexOf(emph);
   const pre = idx >= 0 ? hero.headline.slice(0, idx) : hero.headline;
   const hasEmph = idx >= 0;
+
+  // The faux browser bar shows whichever site this audience's case study is,
+  // so it must come from the featured link rather than being hardcoded.
+  const featuredDomain = featured.href.replace(/^https?:\/\//, "").replace(/\/$/, "");
 
   return (
     <section id="top" className="relative scroll-mt-[88px]">
@@ -53,7 +57,7 @@ export function Hero() {
 
             <Reveal delay={240}>
               <div className="mt-[34px] flex flex-wrap gap-x-[22px] gap-y-3">
-                {FEATURES.map((f) => (
+                {hero.features.map((f) => (
                   <span key={f} className="flex items-center gap-2 text-[14px] font-semibold text-muted">
                     <span className="text-ink-soft" aria-hidden>
                       ✦
@@ -65,7 +69,7 @@ export function Hero() {
             </Reveal>
           </div>
 
-          {/* Faux-browser preview with the real AAM screenshot */}
+          {/* Faux-browser preview of this audience's featured build */}
           <Reveal delay={150} className="relative">
             <div
               aria-hidden
@@ -78,7 +82,7 @@ export function Hero() {
                 <span className="h-2.5 w-2.5 rounded-full bg-amber" />
                 <span className="h-2.5 w-2.5 rounded-full bg-sage" />
                 <span className="ml-2.5 flex h-[18px] flex-1 items-center rounded-md bg-paper px-2.5 text-[10.5px] font-semibold text-faint">
-                  abolishabortionmichigan.com
+                  {featuredDomain}
                 </span>
               </div>
               <div className="relative aspect-[16/11] w-full bg-sand">
@@ -95,8 +99,8 @@ export function Hero() {
               </div>
             </div>
             <p className="relative z-[1] mt-4 text-center text-[13px] font-semibold text-faint">
-              {trust.line.replace(/Abolish Abortion Michigan\.?$/, "")}
-              <span className="text-fg">Abolish Abortion Michigan.</span>
+              {trust.line.slice(0, trust.line.lastIndexOf(trust.emphasis))}
+              <span className="text-fg">{trust.emphasis}</span>
             </p>
           </Reveal>
         </div>

@@ -3,9 +3,10 @@ import { siteConfig } from "@/config/site.config";
 
 /**
  * Lettermark: a fancy italic serif "E" on a rounded forest tile + the wordmark.
- * `onInk` renders the footer variant (smaller tile, no tagline).
+ * `onInk` renders the footer variant (smaller tile, no tagline). `tagline`
+ * follows the audience, since the header appears on both landing pages.
  */
-export function Wordmark({ onInk = false }: { onInk?: boolean }) {
+export function Wordmark({ onInk = false, tagline }: { onInk?: boolean; tagline?: string }) {
   return (
     <span className="inline-flex items-center gap-3">
       <span
@@ -35,7 +36,7 @@ export function Wordmark({ onInk = false }: { onInk?: boolean }) {
         </span>
         {!onInk && (
           <span className="mt-0.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-faint">
-            Mission-driven web
+            {tagline ?? "Websites that work"}
           </span>
         )}
       </span>
