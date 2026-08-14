@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useCallback, useRef, useState, type FormEvent } from "react";
 import { siteConfig } from "@/config/site.config";
 import { validateContact } from "@/lib/validation";
 import { Button } from "./Button";
+import { Turnstile } from "./Turnstile";
 import { cn } from "@/lib/cn";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -21,6 +22,10 @@ export function ContactForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<Status>("idle");
   const [serverError, setServerError] = useState<string | null>(null);
+  // Turnstile token. Single-use, so a failed submit must re-challenge before retry.
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const resetTurnstile = useRef<(() => void) | null>(null);
+  const onToken = useCallback((t: string) => setTurnstileToken(t), []);
 
   const set = (key: keyof typeof initial) => (e: { target: { value: string } }) =>
     setValues((v) => ({ ...v, [key]: e.target.value }));
@@ -46,6 +51,7 @@ export function ContactForm() {
         body: JSON.stringify({
           ...values,
           sourcePath: typeof window === "undefined" ? "" : window.location.pathname,
+          turnstileToken,
         }),
       });
       const data = (await res.json().catch(() => ({}))) as {
@@ -57,6 +63,8 @@ export function ContactForm() {
         if (data.fields) setErrors(data.fields);
         setServerError(data.error ?? "Something went wrong. Please try again.");
         setStatus("error");
+        // The token is spent whether or not the request succeeded.
+        resetTurnstile.current?.();
         return;
       }
       setStatus("success");
@@ -64,6 +72,7 @@ export function ContactForm() {
     } catch {
       setServerError("Network error — please check your connection and try again.");
       setStatus("error");
+      resetTurnstile.current?.();
     }
   }
 
@@ -231,6 +240,8 @@ export function ContactForm() {
           {serverError}
         </p>
       )}
+
+      <Turnstile onToken={onToken} resetRef={resetTurnstile} />
 
       <Button
         type="submit"

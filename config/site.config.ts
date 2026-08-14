@@ -94,6 +94,14 @@ export const siteConfig = {
   // ── Booking ───────────────────────────────────────────────────────────────
   // Optional "Book a call" link. Paste your Cal.com / Calendly URL here to show
   // a booking button next to the contact form. Leave url empty to hide it.
+  // ── Turnstile ─────────────────────────────────────────────────────────────
+  // Cloudflare Turnstile site key. PUBLIC by design — it ships in the client
+  // bundle either way, so it lives here rather than in NEXT_PUBLIC_*, which on
+  // Vercel silently stops being inlined if the variable is marked sensitive.
+  // The matching secret is server-side only, in TURNSTILE_SECRET.
+  // Empty string disables the widget.
+  turnstileSiteKey: "0x4AAAAAAEQJkJSZE9z3YM7i",
+
   booking: {
     url: "", // e.g. "https://cal.com/dustin/intro" or "https://calendly.com/…"
     label: "Book a 15-min call",
