@@ -88,6 +88,15 @@ export default function PrivacyPage() {
             <li>
               <strong className="text-ink">Upstash</strong> — rate-limiting to prevent spam.
             </li>
+            <li>
+              <strong className="text-ink">Cloudflare</strong> — the anti-spam check on the
+              contact form (Turnstile), which looks at your browser and IP to tell people from
+              bots.
+            </li>
+            <li>
+              <strong className="text-ink">Neon</strong> — the database that stores contact-form
+              submissions so I have a record of your inquiry and can follow up.
+            </li>
           </ul>
         </Block>
 

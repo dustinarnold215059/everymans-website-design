@@ -1,0 +1,80 @@
+// Every Man's Website Design — lead store.
+//
+// Until now an inquiry existed only as an email. If Resend hiccupped, or the
+// message got deleted, the lead was gone with no record that it ever arrived —
+// and there was no way to answer "which city page actually produces work?"
+//
+// This is also the foundation for the rest of the pipeline: a proposal, a
+// signed agreement and a deposit all hang off a lead row.
+//
+// MIGRATIONS: never run `prisma migrate dev`, `migrate reset` or `migrate diff`
+// against this database. The Vercel build runs a plain `next build` and does not
+// migrate, so schema changes are applied out-of-band as idempotent DDL
+// (`ADD COLUMN IF NOT EXISTS`). Passing a live DATABASE_URL as a shadow database
+// has previously dropped and recreated a production database.
+
+generator client {
+  provider = "prisma-client-js"
+  // Same output path the other two sites use, so the import shape matches.
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUOTED
+  WON
+  LOST
+}
+
+/// Which side of the site the inquiry came from.
+enum LeadAudience {
+  BUSINESS
+  MINISTRIES
+  UNKNOWN
+}
+
+model Lead {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // ── What they sent ────────────────────────────────────────────────────────
+  name         String
+  organization String?
+  email        String
+  need         String
+  message      String  @db.Text
+
+  // ── Where it came from ────────────────────────────────────────────────────
+  /// e.g. "/business/dearborn" — the page the form was submitted from.
+  sourcePath String?
+  audience   LeadAudience @default(UNKNOWN)
+  /// City slug when the lead came from a city page, e.g. "dearborn".
+  citySlug   String?
+
+  // Deliberately NOT stored: IP address and user agent. Rate limiting needs an
+  // IP only for the moment of the request and keeps it in Redis; keeping a copy
+  // here would collect more than the privacy policy promises.
+
+  // ── Pipeline ──────────────────────────────────────────────────────────────
+  status       LeadStatus @default(NEW)
+  /// Private notes — never shown to the person who submitted.
+  notes        String?    @db.Text
+  /// Quoted amount in cents, so there is no floating-point money.
+  quotedCents  Int?
+  contactedAt  DateTime?
+  wonAt        DateTime?
+  lostAt       DateTime?
+  lostReason   String?
+
+  @@index([createdAt])
+  @@index([status])
+  @@index([audience, citySlug])
+  @@map("leads")
+}
