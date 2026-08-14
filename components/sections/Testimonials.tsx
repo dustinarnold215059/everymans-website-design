@@ -7,7 +7,7 @@ import { Reveal } from "@/components/ui/Reveal";
 export function Testimonials({ content = siteConfig }: { content?: PageContent }) {
   const { proof } = content;
 
-  const emph = "we never had to explain ourselves.";
+  const emph = proof.emphasis;
   const idx = proof.quote.lastIndexOf(emph);
   const pre = idx >= 0 ? proof.quote.slice(0, idx) : proof.quote;
   const hasEmph = idx >= 0;
@@ -25,7 +25,7 @@ export function Testimonials({ content = siteConfig }: { content?: PageContent }
               </blockquote>
               <div className="mt-[22px] flex items-center gap-3">
                 <div className="flex h-[42px] w-[42px] items-center justify-center rounded-full bg-ink text-[15px] font-extrabold text-on-ink">
-                  AAM
+                  {proof.initials}
                 </div>
                 <div>
                   <div className="text-[14.5px] font-bold">{proof.author}</div>

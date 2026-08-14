@@ -11,6 +11,9 @@ import { WhoIServe } from "@/components/sections/WhoIServe";
 import { About } from "@/components/sections/About";
 import { Faq } from "@/components/sections/Faq";
 import { Contact } from "@/components/sections/Contact";
+import Link from "next/link";
+import { cities } from "@/config/cities";
+import { Section, Kicker } from "@/components/ui/Section";
 
 const title = "Websites for Local Businesses in Metro Detroit";
 const description =
@@ -54,6 +57,32 @@ export default function BusinessPage() {
       <WhoIServe content={businessContent} />
       <About content={businessContent} />
       <Faq content={businessContent} />
+
+      {/* Entry point to the per-city pages — without these links crawlers
+          never reach them, and neither do visitors. */}
+      <Section tone="sand">
+        <Kicker>Service area</Kicker>
+        <h2 className="mt-3 font-display text-[clamp(26px,4.5vw,34px)] font-medium tracking-[-0.018em]">
+          Where I build.
+        </h2>
+        <p className="mt-3.5 max-w-[42em] text-base leading-[1.55] text-muted">
+          Metro Detroit, mostly the western and downriver suburbs. Pick your city to see the
+          streets and trades I work in.
+        </p>
+        <ul className="mt-6 flex flex-wrap gap-2.5">
+          {cities.map((c) => (
+            <li key={c.slug}>
+              <Link
+                href={`/business/${c.slug}`}
+                className="inline-flex rounded-full border border-line bg-surface px-4 py-2 text-[14px] font-semibold text-fg transition-colors hover:border-accent hover:text-accent"
+              >
+                {c.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
       <Contact content={businessContent} />
     </>
   );

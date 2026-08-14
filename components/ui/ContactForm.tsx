@@ -14,7 +14,7 @@ const cardCls = "rounded-[20px] border border-line bg-surface p-7 shadow-form sm
 const labelCls = "block text-[13px] font-bold text-fg";
 const fieldCls =
   "mt-1.5 w-full rounded-[10px] border border-line bg-paper px-3.5 py-3 text-[15px] font-medium text-fg transition-colors placeholder:text-faint/70 focus:border-accent focus:bg-surface focus:outline-none";
-const errCls = "mt-1 text-xs font-semibold text-accent";
+const errCls = "mt-1 text-xs font-semibold text-accent-ink";
 
 export function ContactForm() {
   const [values, setValues] = useState(initial);

@@ -39,7 +39,7 @@ export function Kicker({ children, onInk = false }: { children: ReactNode; onInk
     <span
       className={cn(
         "text-[12.5px] font-bold uppercase tracking-[0.14em]",
-        onInk ? "text-accent-soft" : "text-accent",
+        onInk ? "text-accent-soft" : "text-accent-ink",
       )}
     >
       {children}
