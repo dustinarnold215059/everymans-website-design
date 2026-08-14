@@ -7,9 +7,14 @@ import { Button } from "@/components/ui/Button";
 import { Kicker } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 
-const title = "Web Design for Ministries & Local Businesses";
+// Audience-NEUTRAL on purpose. This is the page that ranks for the brand name,
+// so its search snippet is what a local-business prospect sees when they look
+// the business up after taking a card — naming churches and ministries there
+// undoes the separation the rest of the site maintains. The two doors on the
+// page do the sorting once someone arrives.
+const title = "Custom Websites, Built and Maintained by One Person";
 const description =
-  "I build fast, modern websites two ways: for churches, ministries and nonprofits, and for local businesses around Metro Detroit. Pick the one that sounds like you.";
+  "Fast, modern websites built from scratch — no templates, a fixed price agreed before I start, and you own everything. Built and maintained by one person.";
 
 export const metadata: Metadata = {
   title,
