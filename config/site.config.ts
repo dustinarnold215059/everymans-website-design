@@ -14,8 +14,14 @@ export const siteConfig = {
   // ── Brand / meta ──────────────────────────────────────────────────────────
   name: "Every Man's Website Design",
   shortName: "Every Man's",
+  // Display form, used in the footer and the OG card.
   domain: "everymanswebsitedesign.com",
-  url: "https://everymanswebsitedesign.com",
+  // MUST be the host the site actually serves on. Vercel 307s the apex to www,
+  // so every canonical tag, og:url, JSON-LD url and sitemap entry pointed at a
+  // URL that immediately redirected away — 19 redirects on every crawl and a
+  // canonical signal contradicting itself. Override with NEXT_PUBLIC_SITE_URL
+  // if the primary domain ever changes.
+  url: "https://www.everymanswebsitedesign.com",
   // Proton mailbox on the domain. Shown on the site and used as the contact
   // address; the Resend sender is set separately via EMAIL_FROM.
   email: "contact@everymanswebsitedesign.com",
