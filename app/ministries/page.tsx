@@ -16,6 +16,13 @@ const description = siteConfig.ministriesDescription;
 export const metadata: Metadata = {
   title,
   description,
+  keywords: [
+    "church website design",
+    "ministry website",
+    "nonprofit website design",
+    "abolition movement website",
+    "mission-driven web design",
+  ],
   alternates: { canonical: "/ministries" },
   openGraph: {
     type: "website",

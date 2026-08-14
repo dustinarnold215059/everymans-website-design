@@ -22,11 +22,11 @@ export const siteConfig = {
   // the Organization JSON-LD, and the manifest, all of which render on /business.
   // The audience-specific wording lives on each landing page.
   description:
-    "Fast, modern websites built and maintained by one person — for churches, ministries and nonprofits, and for local businesses around Metro Detroit.",
+    "Fast, modern websites, designed and built from scratch and maintained by one person — no templates, fixed price, and you own everything.",
   // Ministry-specific copy, used by /ministries.
   ministriesDescription:
     "Fast, modern websites for churches, ministries, nonprofits, and mission-driven causes — designed, built, and maintained by someone who's part of the work.",
-  ogImageAlt: "Every Man's Website Design — websites for ministries and local businesses.",
+  ogImageAlt: "Every Man's Website Design — custom websites built and maintained by one person.",
 
   // ── Brand palette ─────────────────────────────────────────────────────────
   // Deep evergreen anchor + warm clay accent + warm neutrals.

@@ -12,6 +12,14 @@
 
 export type AudienceKey = "ministries" | "business";
 
+/**
+ * The two sides are strictly separated. Abolition work is controversial and a
+ * local-business prospect handed a card must not be able to reach it, so
+ * NEITHER landing page links to the other, each has its own case-study page,
+ * and the footer only ever shows the side you are on. The chooser at `/` is
+ * the single place both appear.
+ */
+
 export type Audience = {
   readonly key: AudienceKey;
   readonly base: string;
@@ -21,6 +29,11 @@ export type Audience = {
   readonly tagline: string;
   readonly nav: readonly { readonly label: string; readonly href: string }[];
   readonly cta: { readonly label: string; readonly href: string };
+  /** Footer copy for this side only. The credit link must stay on-audience. */
+  readonly footer: {
+    readonly blurb: string;
+    readonly credit: { readonly label: string; readonly href: string };
+  };
 };
 
 export const AUDIENCES: Record<AudienceKey, Audience> = {
@@ -37,6 +50,13 @@ export const AUDIENCES: Record<AudienceKey, Audience> = {
       { label: "About", href: "/ministries#about" },
     ],
     cta: { label: "Start a project", href: "/ministries#contact" },
+    footer: {
+      blurb: "Fast, modern websites for ministries, nonprofits, and mission-driven causes.",
+      credit: {
+        label: "Proudly built Abolish Abortion Michigan",
+        href: "https://abolishabortionmichigan.com",
+      },
+    },
   },
   business: {
     key: "business",
@@ -47,10 +67,15 @@ export const AUDIENCES: Record<AudienceKey, Audience> = {
       { label: "Services", href: "/business#services" },
       { label: "Pricing", href: "/business#pricing" },
       { label: "Work", href: "/business#work" },
-      { label: "Case study", href: "/work" },
+      { label: "Case study", href: "/business/work" },
       { label: "About", href: "/business#about" },
     ],
     cta: { label: "Get a price", href: "/business#contact" },
+    footer: {
+      blurb:
+        "Fast, modern websites for local businesses around Metro Detroit. Built and maintained by one person.",
+      credit: { label: "Proudly built MRA Photography", href: "https://www.photographymra.com" },
+    },
   },
 };
 
