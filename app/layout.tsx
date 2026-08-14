@@ -43,9 +43,6 @@ export const metadata: Metadata = {
   // too. Ministry terms live on the /ministries page metadata.
   keywords: [
     "web design",
-    "small business website design",
-    "local business website",
-    "Metro Detroit web design",
     "website design",
     "Next.js developer",
   ],

@@ -160,6 +160,11 @@ export const siteConfig = {
     tags: ["Next.js", "Vercel", "Petitions", "Donations", "Bill tracker"],
     image: "/work/aam-home.png",
     caseStudyHref: "/work",
+    stats: [
+      { value: "Live", label: "petition system" },
+      { value: "Live", label: "bill tracker" },
+      { value: "100%", label: "mobile-ready" },
+    ],
   },
 
   // ── Social proof (testimonial + metrics) ──────────────────────────────────

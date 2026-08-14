@@ -6,12 +6,6 @@ import { Section, Kicker } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 
-const STATS = [
-  { value: "Live", label: "petition system" },
-  { value: "Live", label: "bill tracker" },
-  { value: "100%", label: "mobile-ready" },
-];
-
 export function FeaturedWork({ content = siteConfig }: { content?: PageContent }) {
   const { featured } = content;
 
@@ -65,7 +59,7 @@ export function FeaturedWork({ content = siteConfig }: { content?: PageContent }
               />
             </div>
             <div className="flex justify-between px-[26px] py-[22px]">
-              {STATS.map((s) => (
+              {featured.stats.map((s) => (
                 <div key={s.label}>
                   <div className="font-display text-[22px] font-semibold text-ink-soft">{s.value}</div>
                   <div className="text-[11px] font-semibold text-faint">{s.label}</div>
