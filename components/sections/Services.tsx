@@ -1,12 +1,13 @@
 import { siteConfig } from "@/config/site.config";
+import type { PageContent } from "@/config/page-content";
 import { Section, Kicker } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { IconBuild, IconCare, IconData } from "@/components/ui/icons";
 
 const icons = [IconBuild, IconCare, IconData];
 
-export function Services() {
-  const { services } = siteConfig;
+export function Services({ content = siteConfig }: { content?: PageContent }) {
+  const { services } = content;
 
   return (
     <Section id="services" tone="paper">
@@ -15,7 +16,7 @@ export function Services() {
           <div className="max-w-[34em]">
             <Kicker>{services.heading}</Kicker>
             <h2 className="mt-3 font-display text-[clamp(30px,5vw,40px)] font-medium leading-[1.08] tracking-[-0.018em]">
-              Build it, keep it running, automate the rest.
+              {services.title}
             </h2>
           </div>
           <p className="max-w-[22em] text-base leading-[1.55] text-muted">{services.intro}</p>

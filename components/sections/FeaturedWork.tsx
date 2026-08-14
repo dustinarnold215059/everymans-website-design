@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { siteConfig } from "@/config/site.config";
+import type { PageContent } from "@/config/page-content";
 import { blurData } from "@/config/blur";
 import { Section, Kicker } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
@@ -11,8 +12,8 @@ const STATS = [
   { value: "100%", label: "mobile-ready" },
 ];
 
-export function FeaturedWork() {
-  const { featured } = siteConfig;
+export function FeaturedWork({ content = siteConfig }: { content?: PageContent }) {
+  const { featured } = content;
 
   return (
     <Section id="work" tone="paper">

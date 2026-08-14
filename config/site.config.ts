@@ -18,9 +18,15 @@ export const siteConfig = {
   url: "https://everymanswebsitedesign.com",
   email: "Everymanswebsitedesign@gmail.com", // shown on the site + Contact section
   tagline: "Websites that do the work — built by someone who gets the mission.",
+  // Site-wide, so it must cover BOTH audiences — it feeds the layout metadata,
+  // the Organization JSON-LD, and the manifest, all of which render on /business.
+  // The audience-specific wording lives on each landing page.
   description:
+    "Fast, modern websites built and maintained by one person — for churches, ministries and nonprofits, and for local businesses around Metro Detroit.",
+  // Ministry-specific copy, used by /ministries.
+  ministriesDescription:
     "Fast, modern websites for churches, ministries, nonprofits, and mission-driven causes — designed, built, and maintained by someone who's part of the work.",
-  ogImageAlt: "Every Man's Website Design — websites for mission-driven organizations.",
+  ogImageAlt: "Every Man's Website Design — websites for ministries and local businesses.",
 
   // ── Brand palette ─────────────────────────────────────────────────────────
   // Deep evergreen anchor + warm clay accent + warm neutrals.
@@ -56,14 +62,16 @@ export const siteConfig = {
   },
 
   // ── Navigation ────────────────────────────────────────────────────────────
+  // Superseded by config/navigation.ts, which drives the header and footer for
+  // both audiences. Kept in sync so nothing here points at a dead anchor.
   nav: [
-    { label: "Services", href: "/#services" },
-    { label: "Process", href: "/#process" },
-    { label: "Work", href: "/#work" },
+    { label: "Services", href: "/ministries#services" },
+    { label: "Process", href: "/ministries#process" },
+    { label: "Work", href: "/ministries#work" },
     { label: "Case study", href: "/work" },
-    { label: "About", href: "/#about" },
+    { label: "About", href: "/ministries#about" },
   ],
-  primaryCta: { label: "Start a project", href: "/#contact" },
+  primaryCta: { label: "Start a project", href: "/ministries#contact" },
 
   // ── Booking ───────────────────────────────────────────────────────────────
   // Optional "Book a call" link. Paste your Cal.com / Calendly URL here to show
@@ -77,20 +85,26 @@ export const siteConfig = {
   hero: {
     eyebrow: "Web design for mission-driven organizations",
     headline: "Websites that do the work — built by someone who gets the mission.",
+    // Closing phrase rendered in italic serif. Must appear in `headline`.
+    emphasis: "gets the mission.",
     subhead:
       "I design, build, and maintain fast, modern websites for ministries, nonprofits, and causes that matter — and because I'm part of the work, you're not explaining your mission to a stranger.",
-    primary: { label: "See my work", href: "/#work" },
-    secondary: { label: "Start a project", href: "/#contact" },
+    primary: { label: "See my work", href: "/ministries#work" },
+    secondary: { label: "Start a project", href: "/ministries#contact" },
+    features: ["Fast, Lighthouse-friendly", "Secure by default", "Built & maintained by me"],
   },
 
   // ── Trust strip ───────────────────────────────────────────────────────────
   trust: {
     line: "Trusted to build for organizations like Abolish Abortion Michigan.",
+    // Tail of `line` rendered in full-strength ink.
+    emphasis: "Abolish Abortion Michigan.",
   },
 
   // ── Services ──────────────────────────────────────────────────────────────
   services: {
     heading: "What I do",
+    title: "Build it, keep it running, automate the rest.",
     intro: "Three ways I help mission-driven organizations show up well online.",
     items: [
       {
@@ -114,6 +128,7 @@ export const siteConfig = {
   // ── How it works ──────────────────────────────────────────────────────────
   process: {
     heading: "How it works",
+    title: "From first hello to a site you're proud of.",
     intro: "A simple, predictable path from first conversation to launch — and beyond.",
     steps: [
       {
@@ -166,6 +181,7 @@ export const siteConfig = {
   // ── Who I serve ───────────────────────────────────────────────────────────
   audience: {
     heading: "Who I serve",
+    title: "If your work matters, your website should too.",
     intro: "If your work matters, your website should too.",
     items: [
       "Churches",
@@ -179,6 +195,7 @@ export const siteConfig = {
   // ── About ─────────────────────────────────────────────────────────────────
   about: {
     heading: "About",
+    title: "A developer who's part of the work.",
     name: "Dustin",
     body: "I'm Dustin — a developer and data analyst who builds websites for organizations and causes I actually care about. I combine clean, modern web design with an analytics background, so I can build the site and automate the manual work behind it. I work with churches, ministries, nonprofits, and abolition groups, and I'm part of those communities myself.",
     points: [
@@ -191,6 +208,7 @@ export const siteConfig = {
   // ── FAQ ───────────────────────────────────────────────────────────────────
   faq: {
     heading: "Questions, answered",
+    title: "Good questions get straight answers.",
     intro: "The things people usually want to know before reaching out.",
     items: [
       {
@@ -220,7 +238,7 @@ export const siteConfig = {
   ctaBand: {
     heading: "Tell me what you need and I'll show you what's possible.",
     body: "No jargon, no pressure — just a straight conversation about your mission and your site.",
-    cta: { label: "Start a project", href: "/#contact" },
+    cta: { label: "Start a project", href: "/ministries#contact" },
   },
 
   // ── Contact ───────────────────────────────────────────────────────────────
@@ -243,7 +261,7 @@ export const siteConfig = {
   // ── Footer ────────────────────────────────────────────────────────────────
   footer: {
     blurb:
-      "Fast, modern websites for ministries, nonprofits, and mission-driven causes.",
+      "Fast, modern websites for ministries and nonprofits, and for local businesses around Metro Detroit. Built and maintained by one person.",
     credit: {
       label: "Proudly built Abolish Abortion Michigan",
       href: "https://abolishabortionmichigan.com",

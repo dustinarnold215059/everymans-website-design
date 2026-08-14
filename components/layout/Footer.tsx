@@ -1,33 +1,47 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site.config";
+import { AUDIENCES } from "@/config/navigation";
 import { Container } from "@/components/ui/Container";
 import { Wordmark } from "./Wordmark";
 
-const exploreLinks = [...siteConfig.nav, { label: "Contact", href: "/#contact" }];
+// The footer appears on every page including the chooser, so it lists BOTH
+// audiences rather than guessing which one the visitor came for.
+const columns = [
+  {
+    title: "Churches & nonprofits",
+    links: [...AUDIENCES.ministries.nav, AUDIENCES.ministries.cta],
+  },
+  {
+    title: "Local business",
+    links: [...AUDIENCES.business.nav, AUDIENCES.business.cta],
+  },
+];
 
 export function Footer() {
   const year = new Date().getFullYear();
 
   return (
     <footer className="bg-ink text-on-ink-muted">
-      <Container className="grid gap-10 pb-[30px] pt-14 md:grid-cols-[1.6fr_1fr_1fr]">
+      <Container className="grid gap-10 pb-[30px] pt-14 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
           <Wordmark onInk />
           <p className="mt-3.5 max-w-[26em] text-[14.5px] leading-[1.6]">{siteConfig.footer.blurb}</p>
         </div>
 
-        <div>
-          <h3 className="text-[12px] font-bold uppercase tracking-[0.12em] text-sage">Explore</h3>
-          <ul className="mt-3.5 flex flex-col gap-2.5">
-            {exploreLinks.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} className="text-[14.5px] transition-colors hover:text-on-ink-bright">
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {columns.map((col) => (
+          <div key={col.title}>
+            <h3 className="text-[12px] font-bold uppercase tracking-[0.12em] text-sage">{col.title}</h3>
+            <ul className="mt-3.5 flex flex-col gap-2.5">
+              {col.links.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="text-[14.5px] transition-colors hover:text-on-ink-bright">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
 
         <div>
           <h3 className="text-[12px] font-bold uppercase tracking-[0.12em] text-sage">Get in touch</h3>

@@ -1,10 +1,11 @@
 import { siteConfig } from "@/config/site.config";
+import type { PageContent } from "@/config/page-content";
 import { Container } from "@/components/ui/Container";
 import { Kicker } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 
-export function Process() {
-  const { process } = siteConfig;
+export function Process({ content = siteConfig }: { content?: PageContent }) {
+  const { process } = content;
 
   return (
     <section id="process" className="mt-6 scroll-mt-[70px] bg-ink text-on-ink">
@@ -13,7 +14,7 @@ export function Process() {
           <div className="max-w-[38em]">
             <Kicker onInk>{process.heading}</Kicker>
             <h2 className="mt-3 font-display text-[clamp(30px,5vw,40px)] font-medium leading-[1.08] tracking-[-0.018em] text-on-ink-bright">
-              From first hello to a site you&apos;re proud of.
+              {process.title}
             </h2>
             <p className="mt-3.5 text-[16.5px] leading-[1.55] text-on-ink-muted">{process.intro}</p>
           </div>

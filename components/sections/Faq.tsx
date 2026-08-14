@@ -1,10 +1,11 @@
 import { siteConfig } from "@/config/site.config";
+import type { PageContent } from "@/config/page-content";
 import { Kicker } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { JsonLd } from "@/components/ui/JsonLd";
 
-export function Faq() {
-  const { faq } = siteConfig;
+export function Faq({ content = siteConfig }: { content?: PageContent }) {
+  const { faq } = content;
 
   const faqJsonLd = {
     "@context": "https://schema.org",
@@ -24,7 +25,7 @@ export function Faq() {
           <div className="mx-auto max-w-[30em] text-center">
             <Kicker>{faq.heading}</Kicker>
             <h2 className="mt-3 font-display text-[clamp(28px,4.5vw,38px)] font-medium leading-[1.08] tracking-[-0.018em]">
-              Good questions get straight answers.
+              {faq.title}
             </h2>
           </div>
         </Reveal>

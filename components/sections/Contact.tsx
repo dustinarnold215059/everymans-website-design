@@ -1,4 +1,5 @@
 import { siteConfig } from "@/config/site.config";
+import type { PageContent } from "@/config/page-content";
 import { Container } from "@/components/ui/Container";
 import { Kicker } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
@@ -12,8 +13,8 @@ const REASSURANCE = [
   "No obligation — just a conversation",
 ];
 
-export function Contact() {
-  const { contact } = siteConfig;
+export function Contact({ content = siteConfig }: { content?: PageContent }) {
+  const { contact } = content;
 
   return (
     <section id="contact" className="scroll-mt-[88px]">

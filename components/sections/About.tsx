@@ -1,10 +1,11 @@
 import { siteConfig } from "@/config/site.config";
+import type { PageContent } from "@/config/page-content";
 import { Container } from "@/components/ui/Container";
 import { Kicker } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 
-export function About() {
-  const { about } = siteConfig;
+export function About({ content = siteConfig }: { content?: PageContent }) {
+  const { about } = content;
 
   return (
     <section id="about" className="scroll-mt-[88px] pb-[74px] pt-10">
@@ -34,7 +35,7 @@ export function About() {
           <Reveal delay={80}>
             <Kicker>{about.heading}</Kicker>
             <h2 className="mt-3 font-display text-[clamp(30px,5vw,40px)] font-medium leading-[1.08] tracking-[-0.018em]">
-              A developer who&apos;s part of the work.
+              {about.title}
             </h2>
             <p className="mt-[18px] max-w-[36em] text-[17px] leading-[1.66] text-muted">{about.body}</p>
             <div className="mt-6 flex flex-col gap-3">
