@@ -78,6 +78,8 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
     name: `${siteConfig.name} — ${city.name}`,
     url: `${siteUrl}/business/${city.slug}`,
     email: siteConfig.email,
+    // Matching the GBP phone helps Google tie the site and the listing together.
+    ...(siteConfig.phone.tel ? { telephone: siteConfig.phone.tel } : {}),
     areaServed: { "@type": "City", name: `${city.name}, MI` },
     serviceType: "Website design and maintenance for local businesses",
     priceRange: `${businessContent.pricing?.tiers[0]?.price}+`,

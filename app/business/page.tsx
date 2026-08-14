@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/config/site.config";
 import { businessContent } from "@/config/business.config";
+import { getGoogleReviews } from "@/lib/google-reviews";
 import { Hero } from "@/components/sections/Hero";
 import { Services } from "@/components/sections/Services";
 import { Pricing } from "@/components/sections/Pricing";
@@ -45,7 +46,10 @@ export const metadata: Metadata = {
  * `businessContent` instead — plus a price band, which ministries does not get
  * because a local owner asks the cost in the first minute.
  */
-export default function BusinessPage() {
+export default async function BusinessPage() {
+  // Real Google reviews when the GBP is verified and has any; otherwise the
+  // component falls back to the written testimonial.
+  const reviews = await getGoogleReviews();
   return (
     <>
       <Hero content={businessContent} />
@@ -53,7 +57,7 @@ export default function BusinessPage() {
       <Pricing content={businessContent} />
       <Process content={businessContent} />
       <FeaturedWork content={businessContent} />
-      <Testimonials content={businessContent} />
+      <Testimonials content={businessContent} reviews={reviews} />
       <WhoIServe content={businessContent} />
       <About content={businessContent} />
       <Faq content={businessContent} />
