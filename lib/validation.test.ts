@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { validateContact } from "@/lib/validation";
 import { siteConfig } from "@/config/site.config";
+import { businessContent } from "@/config/business.config";
 
 const valid = {
   name: "Jane Pastor",
@@ -67,5 +68,25 @@ describe("validateContact", () => {
     if (!result.ok) {
       expect(Object.keys(result.errors).length).toBeGreaterThan(1);
     }
+  });
+
+  // Regression: validation accepted only the ministries option list, so three
+  // of the five options the business form offers were rejected with
+  // "Please choose what you need." — including "Fix or rebuild my current site".
+  it("accepts every need option BOTH audiences actually offer", () => {
+    const all = [
+      ...siteConfig.contact.needOptions,
+      ...businessContent.contact.needOptions,
+    ];
+    for (const need of all) {
+      const result = validateContact({ ...valid, need });
+      expect(result.ok, `need option was rejected: ${need}`).toBe(true);
+    }
+  });
+
+  it("still rejects a need option no audience offers", () => {
+    const result = validateContact({ ...valid, need: "Something I made up" });
+    expect(result.ok).toBe(false);
+    if (!result.ok) expect(result.errors.need).toBeTruthy();
   });
 });

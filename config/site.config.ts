@@ -247,6 +247,10 @@ export const siteConfig = {
         a: "You can take it from there, or put it on a Care Plan and I'll handle hosting, security, backups, domain & email, and content updates for a flat monthly fee.",
       },
       {
+        q: "What happens if you're not around later?",
+        a: "The domain and the site live on your accounts, not mine, and it's built on standard tools any developer can pick up — there's no proprietary system only I can touch. Care plans are month to month with no contract. If I disappeared tomorrow you'd still own everything and could hand it to someone else without starting over.",
+      },
+      {
         q: "Do you only work with abolition groups?",
         a: "No — I work with churches, ministries, nonprofits, abolition groups, and small mission-driven organizations. If your work matters and you need it done right, let's talk.",
       },

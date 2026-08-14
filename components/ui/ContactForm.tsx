@@ -41,7 +41,12 @@ export function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+        // Tell the server which page this came from, so the inquiry email
+        // names the city page that produced the lead.
+        body: JSON.stringify({
+          ...values,
+          sourcePath: typeof window === "undefined" ? "" : window.location.pathname,
+        }),
       });
       const data = (await res.json().catch(() => ({}))) as {
         ok?: boolean;
