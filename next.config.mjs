@@ -5,6 +5,11 @@ const isDev = process.env.NODE_ENV !== "production";
 // Pragmatic CSP that works with Next's runtime + next/font (no remote assets used).
 // 'unsafe-inline' is required for Next's injected styles/bootstrap; 'unsafe-eval'
 // is only needed in dev for Fast Refresh. Tighten with a nonce middleware later if desired.
+// Cloudflare Turnstile needs three directives, not one: it loads a script,
+// renders inside an iframe, and calls home over XHR. Miss any of them and the
+// widget fails silently — the form just never produces a token.
+const TURNSTILE = "https://challenges.cloudflare.com";
+
 const csp = [
   "default-src 'self'",
   "base-uri 'self'",
@@ -13,8 +18,9 @@ const csp = [
   "img-src 'self' data: blob:",
   "font-src 'self' data:",
   "style-src 'self' 'unsafe-inline'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
-  "connect-src 'self'",
+  `script-src 'self' 'unsafe-inline' ${TURNSTILE}${isDev ? " 'unsafe-eval'" : ""}`,
+  `frame-src ${TURNSTILE}`,
+  `connect-src 'self' ${TURNSTILE}`,
   "object-src 'none'",
   "upgrade-insecure-requests",
 ].join("; ");

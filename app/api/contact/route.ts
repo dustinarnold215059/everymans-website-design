@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { validateContact } from "@/lib/validation";
 import { checkRateLimit } from "@/lib/rateLimit";
+import { verifyTurnstile } from "@/lib/turnstile";
 import { sendContactEmail, sendContactAutoReply } from "@/lib/resend";
 
 export const runtime = "nodejs";
@@ -42,7 +43,22 @@ export async function POST(req: Request) {
     console.error("[contact] rate-limit error:", err);
   }
 
-  // 4) Validate
+  // 4) Turnstile — the real spam gate. Runs before validation so a bot never
+  //    reaches the mailer, and after the honeypot so obvious bots cost nothing.
+  //    No-ops until TURNSTILE_SECRET is set.
+  const turnstile = await verifyTurnstile(
+    (body as Record<string, unknown>)?.turnstileToken,
+    ip === "anonymous" ? undefined : ip,
+  );
+  if (!turnstile.ok) {
+    console.warn("[contact] turnstile rejected:", turnstile.reason);
+    return NextResponse.json(
+      { ok: false, error: "Couldn't verify you're human. Please try again." },
+      { status: 403 },
+    );
+  }
+
+  // 5) Validate
   const result = validateContact(body);
   if (!result.ok) {
     return NextResponse.json(
@@ -51,7 +67,7 @@ export async function POST(req: Request) {
     );
   }
 
-  // 5) Send the inquiry to the owner via Resend
+  // 6) Send the inquiry to the owner via Resend
   try {
     await sendContactEmail(result.value);
   } catch (err) {
@@ -62,7 +78,7 @@ export async function POST(req: Request) {
     );
   }
 
-  // 6) Best-effort confirmation to the sender — never fail the request for this
+  // 7) Best-effort confirmation to the sender — never fail the request for this
   try {
     await sendContactAutoReply({ name: result.value.name, email: result.value.email });
   } catch (err) {
