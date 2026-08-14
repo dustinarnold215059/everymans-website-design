@@ -98,6 +98,11 @@ export const businessContent = {
     tags: ["Booking inquiries", "Client galleries", "Online payments", "Google reviews", "Next.js"],
     image: "/work/mra-home.jpg",
     caseStudyHref: "/business/work",
+    stats: [
+      { value: "Live", label: "booking inquiries" },
+      { value: "Live", label: "client galleries" },
+      { value: "100%", label: "mobile-ready" },
+    ],
   },
 
   // ── Proof ─────────────────────────────────────────────────────────────────

@@ -60,6 +60,8 @@ export type PageContent = {
     readonly tags: readonly string[];
     readonly image: string;
     readonly caseStudyHref: string;
+    /** Three chips under the screenshot describing THIS build, not another. */
+    readonly stats: readonly { readonly value: string; readonly label: string }[];
   };
   readonly proof: {
     readonly heading: string;

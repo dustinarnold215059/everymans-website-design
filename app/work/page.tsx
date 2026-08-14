@@ -7,6 +7,12 @@ export const metadata: Metadata = {
   description:
     "Case studies from Every Man's Website Design — including Abolish Abortion Michigan, built from the ground up on Next.js and Vercel.",
   alternates: { canonical: "/work" },
+  // Outside the /ministries segment, so the ministry card must be named.
+  openGraph: {
+    type: "website",
+    url: "/work",
+    images: [{ url: "/ministries/opengraph-image", width: 1200, height: 630 }],
+  },
 };
 
 /**

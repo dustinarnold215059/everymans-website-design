@@ -10,7 +10,15 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: "/business/work" },
-  openGraph: { type: "website", url: "/business/work", title, description },
+  // Explicit image: declaring an openGraph block here clears the one inherited
+  // from the /business segment, which would leave this page with none.
+  openGraph: {
+    type: "website",
+    url: "/business/work",
+    title,
+    description,
+    images: [{ url: "/business/opengraph-image", width: 1200, height: 630 }],
+  },
 };
 
 /**
