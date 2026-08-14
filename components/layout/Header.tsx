@@ -32,7 +32,10 @@ export function Header() {
         <Link
           href={onChooser ? "/" : `${audience.base}#top`}
           className="rounded-md"
-          aria-label={`${siteConfig.name} — home`}
+          // No aria-label: it overrode the visible wordmark text and omitted the
+          // tagline, which fails "labels match accessible names". The visible
+          // text is the accessible name now.
+          title={`${siteConfig.name} — home`}
         >
           <Wordmark tagline={onChooser ? undefined : audience.tagline} />
         </Link>

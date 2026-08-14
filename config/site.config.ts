@@ -45,14 +45,24 @@ export const siteConfig = {
       sage: "#7FA98C", // footer headings, process numbers, muted accents
       "sage-deep": "#2E5848", // dividers on dark
       // ── terracotta (accent) ──
-      accent: "#C5532E", // primary accent, CTA, eyebrows, arrows
-      "accent-hover": "#A8431F", // hover for terracotta button
+      // Darkened from #C5532E so cream text on the primary button clears 4.5:1
+      // (it was 4.32). The shift is imperceptible; the audit failure was not.
+      accent: "#BF512D", // primary accent, CTA, eyebrows, arrows
+      // Also the hero eyebrow on accent-tint, which needed 4.5:1 (was 4.35).
+      "accent-hover": "#A1401E", // hover for terracotta button
       "accent-soft": "#E2A86B", // lighter terracotta (eyebrow on dark, hover on dark)
       "accent-tint": "#EAD8C9", // hero badge background / glow
+      // Terracotta dark enough for SMALL TEXT on every light surface, including
+      // sand (4.5:1 AA). `accent` stays bright for fills, arrows and buttons,
+      // which only need 3:1 as non-text UI — darkening it everywhere to satisfy
+      // 12px eyebrows would have changed the brand.
+      "accent-ink": "#A04325", // eyebrows, inline links, form errors
       // ── text ──
       fg: "#1C1A15", // primary text
       muted: "#5A554A", // secondary body copy
-      faint: "#837C6E", // captions, labels
+      // Was #837C6E at 3.61:1 on paper — failed WCAG AA on every surface it is
+      // used on (wordmark tagline, browser-bar domain, trust line).
+      faint: "#6D675B", // captions, labels
       "on-ink": "#EFE6D2", // text on forest
       "on-ink-bright": "#FCFAF3", // headings on forest
       "on-ink-muted": "#A9BBB0", // footer / process body text on dark
@@ -176,8 +186,10 @@ export const siteConfig = {
     heading: "Proof, not promises",
     quote:
       "Dustin built our site from the ground up and still keeps it running. He understood the mission from day one — we never had to explain ourselves.",
+    emphasis: "we never had to explain ourselves.",
+    initials: "AAM",
     author: "Abolish Abortion Michigan",
-    role: "Client · placeholder quote — swap for a real testimonial",
+    role: "Client",
     stats: [
       { value: "100%", label: "Custom-built — no templates" },
       { value: "Next.js", label: "Modern, fast, and secure" },

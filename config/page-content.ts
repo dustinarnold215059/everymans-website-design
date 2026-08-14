@@ -66,6 +66,10 @@ export type PageContent = {
   readonly proof: {
     readonly heading: string;
     readonly quote: string;
+    /** Closing phrase of `quote` rendered in italic serif. Must appear in it. */
+    readonly emphasis: string;
+    /** Initials in the avatar circle — this client's, not another's. */
+    readonly initials: string;
     readonly author: string;
     readonly role: string;
     readonly stats: readonly { readonly value: string; readonly label: string }[];

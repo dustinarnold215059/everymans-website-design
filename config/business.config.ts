@@ -110,8 +110,10 @@ export const businessContent = {
     heading: "Proof, not promises",
     quote:
       "People find me on Google, look at the galleries, and send an inquiry before I've even talked to them. The site does the first conversation for me.",
+    emphasis: "The site does the first conversation for me.",
+    initials: "MRA",
     author: "MRA Photography",
-    role: "Metro Detroit · placeholder quote — swap for a real testimonial",
+    role: "Metro Detroit",
     stats: [
       { value: "2–3 weeks", label: "Typical build, start to live" },
       { value: "Phone-first", label: "Most of your customers arrive on one" },
