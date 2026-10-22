@@ -29,6 +29,8 @@ export type CaseStudy = {
   stack: string[];
   /** Screenshot gallery. */
   gallery: { label: string; caption: string; image: string }[];
+  /** Optional live demo a prospect can click through (a sample, not the client's site). */
+  demo?: { url: string; label: string; note: string };
 };
 
 export const caseStudies: CaseStudy[] = [
@@ -101,6 +103,11 @@ export const caseStudies: CaseStudy[] = [
       { label: "Portfolio", caption: "Galleries that show the work without a login", image: "/work/mra-portfolio.jpg" },
       { label: "Investment", caption: "Pricing published up front, no email required", image: "/work/mra-investment.jpg" },
     ],
+    demo: {
+      url: "https://demo.everymanswebsitedesign.com",
+      label: "Try a live demo of this site for a photography studio",
+      note: "A sample studio with stock photos: browse the portfolio, packages, city pages and mini-sessions the way a client would.",
+    },
   },
   {
     audience: "business",
