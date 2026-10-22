@@ -98,6 +98,20 @@ export function WorkBody({ studies, copy }: { studies: CaseStudy[]; copy: WorkCo
                 </a>
               </div>
               <p className="mt-2 max-w-3xl text-lg text-muted">{cs.summary}</p>
+              {cs.demo ? (
+                <p className="mt-2 max-w-3xl text-base text-muted">
+                  <a
+                    href={cs.demo.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 font-bold text-accent hover:text-accent-hover"
+                  >
+                    {cs.demo.label}
+                    <IconArrowUpRight width={15} height={15} />
+                  </a>
+                  <span className="block text-sm">{cs.demo.note}</span>
+                </p>
+              ) : null}
               <div className="mt-3 flex flex-wrap gap-x-8 gap-y-1 text-sm text-muted">
                 <span>
                   <span className="font-bold text-ink">Year:</span> {cs.year}
